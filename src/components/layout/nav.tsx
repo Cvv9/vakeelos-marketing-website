@@ -101,7 +101,7 @@ export function Nav() {
                 aria-label="VakeelOS — home"
               >
                 <Image
-                  src="/logo-monogram-glyph.png"
+                  src="/logo-glyph.png"
                   alt=""
                   aria-hidden
                   width={96}
