@@ -59,7 +59,7 @@ const PILLARS = [
     title: "DPDPA-aligned. DPA on request.",
     body: (
       <>
-        Vakeel<span className="accent">OS</span> is built to the Digital Personal Data Protection Act, 2023. We provide a Data Processing Agreement on request, run quarterly penetration tests, and publish a deletion SLA. Privileged communication is treated as a first-class category.
+        Vakeel<span className="accent">OS</span>{' '}is built to the Digital Personal Data Protection Act, 2023. We provide a Data Processing Agreement on request, run quarterly penetration tests, and publish a deletion SLA. Privileged communication is treated as a first-class category.
       </>
     ),
     facts: [

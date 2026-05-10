@@ -199,7 +199,7 @@ export default function PricingPage() {
             </div>
             <div className="col-span-12 md:col-span-4">
               <p className="text-[15px] leading-relaxed text-ink-2">
-                Clio bills in USD. Most Indian-built tools sell on annual contracts. Vakeel<span className="accent">OS</span> opens
+                Clio bills in USD. Most Indian-built tools sell on annual contracts. Vakeel<span className="accent">OS</span>{' '}opens
                 at ₹999 a month per advocate &mdash; billed monthly, in rupees, with no commitment
                 beyond the next hearing cycle.
               </p>

@@ -11,6 +11,7 @@ const GROUPS: {
   intro: string;
   modules: {
     no: string;
+    slug: string;
     title: string;
     blurb: string;
     bullets: string[];
@@ -26,6 +27,7 @@ const GROUPS: {
     modules: [
       {
         no: "01",
+        slug: "cases",
         title: "Case Register",
         blurb:
           "One vault for every matter, party, and document. Filter by court, judge, stage, opposing counsel, or last activity.",
@@ -40,6 +42,7 @@ const GROUPS: {
       },
       {
         no: "02",
+        slug: "causelist",
         title: "Causelist Sync",
         blurb:
           "Daily APHC and TSHC pulls into a clean inbox. You tick the rows that are yours; only those become tracked cases.",
@@ -54,6 +57,7 @@ const GROUPS: {
       },
       {
         no: "03",
+        slug: "hearings",
         title: "Hearing Tracker",
         blurb:
           "Court-by-court calendar with conflict detection. Reminders go out the night before, on the channel your client actually uses.",
@@ -68,6 +72,7 @@ const GROUPS: {
       },
       {
         no: "04",
+        slug: "orders",
         title: "Court Order Vault",
         blurb:
           "We pull the latest order from the court portal and let VakeelBrain summarise it into the four bullets you actually need.",
@@ -90,6 +95,7 @@ const GROUPS: {
     modules: [
       {
         no: "05",
+        slug: "drafter",
         title: "VakeelBrain Drafter",
         blurb:
           "Indian court templates filled from your case data: bail applications, plaints, replies, legal notices, and rejoinders.",
@@ -104,6 +110,7 @@ const GROUPS: {
       },
       {
         no: "06",
+        slug: "research",
         title: "VakeelBrain Research",
         blurb:
           "RAG over Indian Kanoon. Ask in plain English. Get an answer with citations you can verify and cite.",
@@ -126,6 +133,7 @@ const GROUPS: {
     modules: [
       {
         no: "07",
+        slug: "invoicing",
         title: "Net Invoicing",
         blurb:
           "Send a clean invoice with a Razorpay UPI link over WhatsApp. 60% of invoices are paid within 24 hours in our beta cohort.",
@@ -140,6 +148,7 @@ const GROUPS: {
       },
       {
         no: "08",
+        slug: "tasks",
         title: "Tasks & Time",
         blurb:
           "Kanban-style follow-ups linked to a case. A billable timer per matter — no separate timesheet to chase at month-end.",
@@ -162,6 +171,7 @@ const GROUPS: {
     modules: [
       {
         no: "09",
+        slug: "portal",
         title: "Client Portal",
         blurb:
           "A read-only dashboard for your client: matter status, next hearing, invoices, shared documents.",
@@ -227,7 +237,7 @@ export default function FeaturesPage() {
               <div className="col-span-12 md:col-span-8">
                 <div className="space-y-px bg-rule">
                   {g.modules.map((m) => (
-                    <div key={m.no} className="bg-paper p-7 md:p-9">
+                    <div key={m.no} id={m.slug} className="scroll-mt-28 bg-paper p-7 md:p-9">
                       <div className="grid grid-cols-12 items-baseline gap-4">
                         <div className="mono col-span-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-ink-3 md:col-span-1">
                           {m.no}

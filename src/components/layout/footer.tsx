@@ -6,7 +6,7 @@ const UTIL_LINKS: { href: string; label: string }[] = [
   { href: "/waitlist", label: "Waitlist" },
   { href: "/security", label: "Security" },
   { href: "/contact", label: "Contact" },
-  { href: "/contact", label: "Careers" },
+  { href: "mailto:hello@vakeelos.in?subject=Careers%20enquiry", label: "Careers" },
   { href: "/terms", label: "Terms" },
   { href: "/privacy", label: "Privacy" },
   { href: "/dpa", label: "DPA" },

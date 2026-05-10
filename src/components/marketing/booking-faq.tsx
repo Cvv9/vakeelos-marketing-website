@@ -1,6 +1,55 @@
+"use client";
+
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Clock, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+type Slot = { label: string; date: string; slot: string; taken: boolean };
+
+const WEEKDAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as const;
+const MONTH_NAMES = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+] as const;
+
+const TARGET_WEEKDAYS = [3, 4, 5, 1] as const;
+
+const SLOT_TIME_BY_WEEKDAY: Record<number, string> = {
+  3: "10:30 — 11:00 IST",
+  4: "14:00 — 14:30 IST",
+  5: "16:30 — 17:00 IST",
+  1: "11:00 — 11:30 IST",
+};
+
+const TAKEN_WEEKDAY = 5;
+
+const PLACEHOLDER_SLOTS: Slot[] = [
+  { label: "Wed", date: "—", slot: SLOT_TIME_BY_WEEKDAY[3], taken: false },
+  { label: "Thu", date: "—", slot: SLOT_TIME_BY_WEEKDAY[4], taken: false },
+  { label: "Fri", date: "—", slot: SLOT_TIME_BY_WEEKDAY[5], taken: true },
+  { label: "Mon", date: "—", slot: SLOT_TIME_BY_WEEKDAY[1], taken: false },
+];
+
+function nextOccurrence(target: number, from: Date) {
+  const d = new Date(from.getFullYear(), from.getMonth(), from.getDate());
+  const offset = (target - d.getDay() + 7) % 7;
+  d.setDate(d.getDate() + offset);
+  return d;
+}
+
+function computeSlots(): Slot[] {
+  const now = new Date();
+  return TARGET_WEEKDAYS
+    .map((wd) => nextOccurrence(wd, now))
+    .sort((a, b) => a.getTime() - b.getTime())
+    .map((d) => ({
+      label: WEEKDAY_NAMES[d.getDay()],
+      date: `${d.getDate()} ${MONTH_NAMES[d.getMonth()]}`,
+      slot: SLOT_TIME_BY_WEEKDAY[d.getDay()],
+      taken: d.getDay() === TAKEN_WEEKDAY,
+    }));
+}
 
 export function BookingSection() {
   return (
@@ -41,7 +90,16 @@ export function BookingSection() {
   );
 }
 
+const subscribeIsClient = () => () => {};
+
 function BookingCard() {
+  const isClient = useSyncExternalStore(
+    subscribeIsClient,
+    () => true,
+    () => false,
+  );
+  const slots = isClient ? computeSlots() : PLACEHOLDER_SLOTS;
+
   return (
     <div className="reveal rounded-[3px] border border-rule bg-paper p-8">
       <p className="mono text-[11px] uppercase tracking-[0.22em] text-ink-3">
@@ -49,14 +107,9 @@ function BookingCard() {
       </p>
 
       <div className="mt-8 grid grid-cols-1 gap-px bg-rule">
-        {[
-          { label: "Wed", date: "8 May", slot: "10:30 — 11:00 IST", taken: false },
-          { label: "Thu", date: "9 May", slot: "14:00 — 14:30 IST", taken: false },
-          { label: "Fri", date: "10 May", slot: "16:30 — 17:00 IST", taken: true },
-          { label: "Mon", date: "13 May", slot: "11:00 — 11:30 IST", taken: false },
-        ].map((s) => (
+        {slots.map((s) => (
           <button
-            key={`${s.label}-${s.date}`}
+            key={`${s.label}-${s.slot}`}
             type="button"
             disabled={s.taken}
             className="group flex items-center justify-between bg-paper px-4 py-3.5 text-left transition-colors hover:bg-paper-2 disabled:cursor-not-allowed disabled:opacity-45"

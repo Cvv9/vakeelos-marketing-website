@@ -77,7 +77,7 @@ export function HeroCinematic() {
         <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <p className="hero-rise text-[18px] leading-[1.55] text-ink-2" style={{ ['--delay' as string]: '0.6s' }}>
-              Vakeel<span className="accent">OS</span> is a single, calm workspace for India&rsquo;s 1.8 million advocates.
+              Vakeel<span className="accent">OS</span>{' '}is a single, calm workspace for India&rsquo;s 1.8 million advocates.
               Causelist sync, AI drafting, and net invoicing — built and developed in India,
               hosted in India, verified at the Bar Council.
             </p>

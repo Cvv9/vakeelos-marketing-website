@@ -36,7 +36,7 @@ const SERVICES: { num: string; title: string; blurb: string; href: string }[] = 
     num: "06",
     title: "Intelligence Dashboard",
     blurb: "A daily brief at sunrise — hearings, conflicts, overdues, written like a junior would.",
-    href: "/features#dashboard",
+    href: "/features",
   },
 ];
 
@@ -60,7 +60,7 @@ export function ServicesSection() {
           </div>
           <div className="lg:col-span-7 lg:col-start-6">
             <p className="reveal max-w-xl text-[16px] leading-[1.6] text-ink-2">
-              Vakeel<span className="accent">OS</span> replaces the WhatsApp-screenshot workflow with a calm,
+              Vakeel<span className="accent">OS</span>{' '}replaces the WhatsApp-screenshot workflow with a calm,
               keyboard-first studio. Each room is independent, every room is
               connected by the same case spine.
             </p>
