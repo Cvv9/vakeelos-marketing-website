@@ -73,16 +73,16 @@ export function Nav() {
                 : "py-7 lg:py-9"
             }`}
           >
-            {/* Desktop — symmetric layout with centered wordmark */}
+            {/* Desktop — symmetric layout with centered V logo (no wordmark) */}
             <div className="hidden grid-cols-[1fr_auto_1fr] items-center gap-10 md:grid">
-              {/* Left links — hug the centre */}
-              <nav className="flex items-center justify-self-end gap-8 lg:gap-10">
+              {/* Left links — smaller, hug the centre */}
+              <nav className="flex items-center justify-self-end gap-6 lg:gap-7">
                 {LEFT_LINKS.map((l, i) => (
-                  <span key={l.href} className="flex items-center gap-8 lg:gap-10">
-                    {i > 0 && <span aria-hidden className="block h-3 w-px bg-rule-strong opacity-50" />}
+                  <span key={l.href} className="flex items-center gap-6 lg:gap-7">
+                    {i > 0 && <span aria-hidden className="block h-2.5 w-px bg-rule-strong opacity-50" />}
                     <Link
                       href={l.href}
-                      className={`text-[14px] tracking-wide transition-colors ${
+                      className={`text-[12.5px] tracking-wide transition-colors ${
                         isActive(l.href)
                           ? "text-saffron"
                           : "text-ink-2 hover:text-ink"
@@ -94,42 +94,32 @@ export function Nav() {
                 ))}
               </nav>
 
-              {/* Center wordmark — big at rest, compact in the pill */}
+              {/* Center V logo — big at rest, compact in the pill */}
               <Link
                 href="/"
-                className="group flex items-center justify-self-center gap-3 transition-all duration-300 ease-out"
+                className="group flex items-center justify-self-center transition-all duration-300 ease-out"
                 aria-label="VakeelOS — home"
               >
                 <Image
                   src="/logo-glyph.png"
-                  alt=""
-                  aria-hidden
-                  width={96}
-                  height={96}
+                  alt="VakeelOS"
+                  width={192}
+                  height={192}
                   priority
                   className={`block rounded-[3px] transition-all duration-300 ease-out ${
-                    stuck ? "h-7 w-7 lg:h-8 lg:w-8" : "h-10 w-10 lg:h-12 lg:w-12"
+                    stuck ? "h-10 w-10 lg:h-12 lg:w-12" : "h-16 w-16 lg:h-20 lg:w-20"
                   }`}
                 />
-                <span
-                  className={`display-tight font-semibold tracking-tight text-ink transition-all duration-300 ease-out ${
-                    stuck
-                      ? "text-[22px] lg:text-[26px]"
-                      : "text-[36px] lg:text-[44px]"
-                  }`}
-                >
-                  Vakeel<span className="accent">OS</span>
-                </span>
               </Link>
 
-              {/* Right links — hug the centre */}
-              <nav className="flex items-center justify-self-start gap-8 lg:gap-10">
+              {/* Right links — smaller, hug the centre */}
+              <nav className="flex items-center justify-self-start gap-6 lg:gap-7">
                 {RIGHT_LINKS.map((l, i) => (
-                  <span key={l.href} className="flex items-center gap-8 lg:gap-10">
-                    {i > 0 && <span aria-hidden className="block h-3 w-px bg-rule-strong opacity-50" />}
+                  <span key={l.href} className="flex items-center gap-6 lg:gap-7">
+                    {i > 0 && <span aria-hidden className="block h-2.5 w-px bg-rule-strong opacity-50" />}
                     <Link
                       href={l.href}
-                      className={`text-[14px] tracking-wide transition-colors ${
+                      className={`text-[12.5px] tracking-wide transition-colors ${
                         isActive(l.href)
                           ? "text-saffron"
                           : "text-ink-2 hover:text-ink"
@@ -142,30 +132,22 @@ export function Nav() {
               </nav>
             </div>
 
-            {/* Mobile fallback — centred wordmark only */}
+            {/* Mobile fallback — centred V logo only */}
             <Link
               href="/"
-              className="group mx-auto flex w-fit items-center gap-2.5 md:hidden"
+              className="group mx-auto flex w-fit items-center md:hidden"
               aria-label="VakeelOS — home"
             >
               <Image
-                src="/logo-monogram-glyph.png"
-                alt=""
-                aria-hidden
-                width={96}
-                height={96}
+                src="/logo-glyph.png"
+                alt="VakeelOS"
+                width={192}
+                height={192}
                 priority
                 className={`block rounded-[3px] transition-all duration-300 ease-out ${
-                  stuck ? "h-6 w-6" : "h-8 w-8"
+                  stuck ? "h-9 w-9" : "h-14 w-14"
                 }`}
               />
-              <span
-                className={`display-tight font-semibold tracking-tight text-ink transition-all duration-300 ease-out ${
-                  stuck ? "text-[20px]" : "text-[26px]"
-                }`}
-              >
-                Vakeel<span className="accent">OS</span>
-              </span>
             </Link>
           </div>
         </div>
