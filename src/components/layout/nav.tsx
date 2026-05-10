@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -97,11 +98,17 @@ export function Nav() {
               <Link
                 href="/"
                 className="group flex items-center justify-self-center gap-3 transition-all duration-300 ease-out"
+                aria-label="VakeelOS — home"
               >
-                <span
+                <Image
+                  src="/logo-monogram-glyph.png"
+                  alt=""
                   aria-hidden
-                  className={`block bg-saffron transition-all duration-300 ease-out group-hover:rotate-45 ${
-                    stuck ? "h-3 w-3" : "h-4 w-4"
+                  width={96}
+                  height={96}
+                  priority
+                  className={`block rounded-[3px] transition-all duration-300 ease-out ${
+                    stuck ? "h-7 w-7 lg:h-8 lg:w-8" : "h-10 w-10 lg:h-12 lg:w-12"
                   }`}
                 />
                 <span
@@ -139,8 +146,19 @@ export function Nav() {
             <Link
               href="/"
               className="group mx-auto flex w-fit items-center gap-2.5 md:hidden"
+              aria-label="VakeelOS — home"
             >
-              <span aria-hidden className="block h-3.5 w-3.5 bg-saffron" />
+              <Image
+                src="/logo-monogram-glyph.png"
+                alt=""
+                aria-hidden
+                width={96}
+                height={96}
+                priority
+                className={`block rounded-[3px] transition-all duration-300 ease-out ${
+                  stuck ? "h-6 w-6" : "h-8 w-8"
+                }`}
+              />
               <span
                 className={`display-tight font-semibold tracking-tight text-ink transition-all duration-300 ease-out ${
                   stuck ? "text-[20px]" : "text-[26px]"

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 const UTIL_LINKS: { href: string; label: string }[] = [
@@ -27,18 +26,6 @@ export function Footer() {
             <p className="mono text-[11px] uppercase tracking-[0.22em] text-ink-3">
               Est. 2026
             </p>
-          </div>
-
-          {/* carved monogram placard — physical brand seal anchored to the billboard */}
-          <div className="mt-10 flex">
-            <Image
-              src="/logo-monogram.png"
-              alt="VakeelOS — carved monogram"
-              width={96}
-              height={96}
-              priority={false}
-              className="block h-20 w-20 rounded-[3px] sm:h-24 sm:w-24"
-            />
           </div>
 
           {/* wordmark — engraved, massive, edge-to-edge */}
