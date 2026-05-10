@@ -69,16 +69,27 @@ export function Nav() {
           <div
             className={`relative transition-all duration-300 ease-out ${
               stuck
-                ? "my-3 rounded-full bg-paper/55 px-6 py-3 ring-1 ring-inset ring-white/15 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.55)] backdrop-blur-2xl backdrop-saturate-150 lg:my-4 lg:px-9 lg:py-3.5"
+                ? "my-3 mx-auto w-fit rounded-full bg-paper/55 px-5 py-2 ring-1 ring-inset ring-white/15 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.55)] backdrop-blur-2xl backdrop-saturate-150 lg:my-4 lg:px-7 lg:py-2"
                 : "py-7 lg:py-9"
             }`}
           >
             {/* Desktop — symmetric layout with centered V logo (no wordmark) */}
-            <div className="hidden grid-cols-[1fr_auto_1fr] items-center gap-12 md:grid">
+            <div
+              className={`hidden md:grid items-center grid-cols-[auto_auto_auto] ${
+                stuck ? "gap-7 lg:gap-9" : "gap-12"
+              }`}
+            >
               {/* Left links */}
-              <nav className="flex items-center justify-self-end gap-7 lg:gap-9">
+              <nav
+                className={`flex items-center justify-self-end ${
+                  stuck ? "gap-5 lg:gap-6" : "gap-7 lg:gap-9"
+                }`}
+              >
                 {LEFT_LINKS.map((l, i) => (
-                  <span key={l.href} className="flex items-center gap-7 lg:gap-9">
+                  <span
+                    key={l.href}
+                    className={`flex items-center ${stuck ? "gap-5 lg:gap-6" : "gap-7 lg:gap-9"}`}
+                  >
                     {i > 0 && <span aria-hidden className="block h-3 w-px bg-rule-strong opacity-50" />}
                     <Link
                       href={l.href}
@@ -107,15 +118,22 @@ export function Nav() {
                   height={256}
                   priority
                   className={`block rounded-[3px] transition-all duration-300 ease-out ${
-                    stuck ? "h-14 w-14 lg:h-16 lg:w-16" : "h-28 w-28 lg:h-32 lg:w-32"
+                    stuck ? "h-9 w-9 lg:h-10 lg:w-10" : "h-28 w-28 lg:h-32 lg:w-32"
                   }`}
                 />
               </Link>
 
               {/* Right links */}
-              <nav className="flex items-center justify-self-start gap-7 lg:gap-9">
+              <nav
+                className={`flex items-center justify-self-start ${
+                  stuck ? "gap-5 lg:gap-6" : "gap-7 lg:gap-9"
+                }`}
+              >
                 {RIGHT_LINKS.map((l, i) => (
-                  <span key={l.href} className="flex items-center gap-7 lg:gap-9">
+                  <span
+                    key={l.href}
+                    className={`flex items-center ${stuck ? "gap-5 lg:gap-6" : "gap-7 lg:gap-9"}`}
+                  >
                     {i > 0 && <span aria-hidden className="block h-3 w-px bg-rule-strong opacity-50" />}
                     <Link
                       href={l.href}
@@ -145,7 +163,7 @@ export function Nav() {
                 height={256}
                 priority
                 className={`block rounded-[3px] transition-all duration-300 ease-out ${
-                  stuck ? "h-12 w-12" : "h-20 w-20"
+                  stuck ? "h-9 w-9" : "h-20 w-20"
                 }`}
               />
             </Link>
