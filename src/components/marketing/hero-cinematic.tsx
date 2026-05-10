@@ -34,7 +34,7 @@ export function HeroCinematic() {
       <div className="mx-auto max-w-7xl px-6 pt-20 pb-12 lg:px-10 lg:pt-28">
         <div className="flex items-center justify-between">
           <p className="mono text-[11px] uppercase tracking-[0.22em] text-ink-3 hero-rise" style={{ ['--delay' as string]: '0s' }}>
-            Made in India
+            Invite only · Early access
           </p>
           <p className="mono text-[11px] uppercase tracking-[0.22em] text-ink-3 hero-rise" style={{ ['--delay' as string]: '0.05s' }}>
             Est. 2026
@@ -82,17 +82,13 @@ export function HeroCinematic() {
               hosted in India, verified at the Bar Council.
             </p>
             <div className="hero-rise mt-8 flex flex-wrap items-center gap-3" style={{ ['--delay' as string]: '0.75s' }}>
-              <Link
-                href="https://app.vakeelos.com/sign-up"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <Link href="/waitlist">
                 <Button
                   size="lg"
                   variant="ink"
                   className="float-soft press group rounded-full px-6"
                 >
-                  Start free trial
+                  Join the waitlist
                   <ArrowUpRight className="ml-1.5 h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </Button>
               </Link>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const LEFT_LINKS = [
   { href: "/#services", label: "Services" },
@@ -11,13 +12,21 @@ const LEFT_LINKS = [
 ];
 
 const RIGHT_LINKS = [
-  { href: "/pricing", label: "Pricing" },
+  { href: "/team", label: "Team" },
   { href: "/faq", label: "FAQ" },
   { href: "/security", label: "Security" },
 ];
 
 export function Nav() {
   const [stuck, setStuck] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    if (href === "/#services") return activeSection === "services";
+    if (href === "/#workflow") return activeSection === "workflow";
+    return pathname === href;
+  };
 
   useEffect(() => {
     const onScroll = () => setStuck(window.scrollY > 4);
@@ -26,22 +35,32 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (pathname !== "/") { setActiveSection(""); return; }
+    const ids = ["services", "workflow"];
+    const observers = ids.map((id) => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+        { threshold: 0.25 }
+      );
+      obs.observe(el);
+      return obs;
+    });
+    return () => observers.forEach((o) => o?.disconnect());
+  }, [pathname]);
+
   return (
     <>
-      {/* Top utility strip — separate entity, scrolls away naturally */}
-      <div className="border-b border-rule/60 bg-paper">
-        <div className="mx-auto flex max-w-7xl items-center justify-end px-6 py-2.5 lg:px-10">
-          <Link
-            href="https://app.vakeelos.com/sign-in"
-            target="_blank"
-            rel="noreferrer"
-            className="group inline-flex items-center gap-1 mono text-[11px] uppercase tracking-[0.22em] text-ink-3 transition-colors hover:text-ink"
-          >
-            Sign in
-            <ArrowUpRight className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-          </Link>
-        </div>
-      </div>
+      {/* Floating waitlist pill — fixed top-right, always visible */}
+      <Link
+        href="/waitlist"
+        className="group mono fixed right-4 top-4 z-[60] inline-flex items-center gap-2 rounded-full border border-ink/20 bg-paper px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-ink shadow-[0_2px_12px_rgba(0,0,0,0.15)] [text-rendering:optimizeLegibility] [-webkit-font-smoothing:antialiased] transition-all duration-200 hover:border-ink/40 hover:shadow-[0_4px_20px_rgba(0,0,0,0.2)] sm:right-5 sm:top-5 sm:px-5 sm:text-[11px] lg:right-8 lg:top-5"
+      >
+        Join the waitlist
+        <ArrowUpRight className="h-3 w-3 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+      </Link>
 
       {/* Sticky main nav — naked at top, glassmorphic pill on scroll */}
       <header className="sticky top-0 z-50">
@@ -56,15 +75,21 @@ export function Nav() {
             {/* Desktop — symmetric layout with centered wordmark */}
             <div className="hidden grid-cols-[1fr_auto_1fr] items-center gap-10 md:grid">
               {/* Left links — hug the centre */}
-              <nav className="flex items-center justify-self-end gap-7 lg:gap-9">
-                {LEFT_LINKS.map((l) => (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    className="text-[14px] tracking-wide text-ink-2 transition-colors hover:text-ink"
-                  >
-                    {l.label}
-                  </Link>
+              <nav className="flex items-center justify-self-end gap-8 lg:gap-10">
+                {LEFT_LINKS.map((l, i) => (
+                  <span key={l.href} className="flex items-center gap-8 lg:gap-10">
+                    {i > 0 && <span aria-hidden className="block h-3 w-px bg-rule-strong opacity-50" />}
+                    <Link
+                      href={l.href}
+                      className={`text-[14px] tracking-wide transition-colors ${
+                        isActive(l.href)
+                          ? "text-saffron"
+                          : "text-ink-2 hover:text-ink"
+                      }`}
+                    >
+                      {l.label}
+                    </Link>
+                  </span>
                 ))}
               </nav>
 
@@ -91,15 +116,21 @@ export function Nav() {
               </Link>
 
               {/* Right links — hug the centre */}
-              <nav className="flex items-center justify-self-start gap-7 lg:gap-9">
-                {RIGHT_LINKS.map((l) => (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    className="text-[14px] tracking-wide text-ink-2 transition-colors hover:text-ink"
-                  >
-                    {l.label}
-                  </Link>
+              <nav className="flex items-center justify-self-start gap-8 lg:gap-10">
+                {RIGHT_LINKS.map((l, i) => (
+                  <span key={l.href} className="flex items-center gap-8 lg:gap-10">
+                    {i > 0 && <span aria-hidden className="block h-3 w-px bg-rule-strong opacity-50" />}
+                    <Link
+                      href={l.href}
+                      className={`text-[14px] tracking-wide transition-colors ${
+                        isActive(l.href)
+                          ? "text-saffron"
+                          : "text-ink-2 hover:text-ink"
+                      }`}
+                    >
+                      {l.label}
+                    </Link>
+                  </span>
                 ))}
               </nav>
             </div>

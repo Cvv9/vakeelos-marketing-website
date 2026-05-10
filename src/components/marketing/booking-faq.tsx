@@ -83,11 +83,7 @@ function BookingCard() {
         ))}
       </div>
 
-      <Link
-        href="https://app.vakeelos.com/sign-up"
-        target="_blank"
-        rel="noreferrer"
-      >
+      <Link href="/contact">
         <Button size="lg" variant="ink" className="press mt-8 w-full">
           Reserve a walkthrough
           <ArrowUpRight className="ml-1.5 h-4 w-4" />

@@ -2,13 +2,14 @@ import Link from "next/link";
 
 const UTIL_LINKS: { href: string; label: string }[] = [
   { href: "/features", label: "Features" },
-  { href: "/pricing", label: "Pricing" },
+  { href: "/team", label: "Team" },
+  { href: "/waitlist", label: "Waitlist" },
   { href: "/security", label: "Security" },
-  { href: "mailto:hello@vakeelos.in", label: "Contact" },
-  { href: "mailto:careers@vakeelos.in", label: "Careers" },
-  { href: "mailto:legal@vakeelos.in?subject=Terms%20of%20Service", label: "Terms" },
-  { href: "mailto:legal@vakeelos.in?subject=Privacy%20Policy", label: "Privacy" },
-  { href: "mailto:legal@vakeelos.in?subject=DPA%20Request", label: "DPA" },
+  { href: "/contact", label: "Contact" },
+  { href: "/contact", label: "Careers" },
+  { href: "/terms", label: "Terms" },
+  { href: "/privacy", label: "Privacy" },
+  { href: "/dpa", label: "DPA" },
 ];
 
 export function Footer() {
@@ -20,7 +21,7 @@ export function Footer() {
           {/* meta strip */}
           <div className="flex items-center justify-between">
             <p className="mono text-[11px] uppercase tracking-[0.22em] text-ink-3">
-              From VarVik Studios
+              Early access · Invite only
             </p>
             <p className="mono text-[11px] uppercase tracking-[0.22em] text-ink-3">
               Est. 2026
@@ -44,15 +45,9 @@ export function Footer() {
               Practice management,{" "}
               <span className="accent">for the Indian bar</span>.
             </p>
-            <div className="flex items-center gap-3 text-ink-3">
-              <span className="mono text-[10.5px] uppercase tracking-[0.22em]">
-                Built in India
-              </span>
-              <span aria-hidden className="block h-3 w-px bg-rule-strong" />
-              <span className="mono text-[10.5px] uppercase tracking-[0.22em]">
-                Hosted in India
-              </span>
-            </div>
+            <p className="mono text-[10.5px] uppercase tracking-[0.22em] text-ink-3">
+              Built and hosted in India
+            </p>
           </div>
 
           {/* wipe-in rule */}

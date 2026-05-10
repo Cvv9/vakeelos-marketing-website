@@ -30,7 +30,7 @@ const TIERS: Tier[] = [
     price: "₹0",
     unit: "/mo · 1 advocate",
     cta: "Open free account",
-    href: "https://app.vakeelos.com/sign-up",
+    href: "/waitlist",
     blurb: "Your first ten cases, organised. Manual hearings. Five drafts. Five invoices a month.",
   },
   {
@@ -39,8 +39,8 @@ const TIERS: Tier[] = [
     tag: "Most independent advocates",
     price: "₹999",
     unit: "/mo · per advocate",
-    cta: "Start 30-day trial",
-    href: "https://app.vakeelos.com/sign-up",
+    cta: "Join the waitlist",
+    href: "/waitlist",
     blurb:
       "Unlimited cases, daily causelist sync, WhatsApp reminders, UPI invoicing, 20 AI drafts/month.",
     highlight: true,
@@ -51,8 +51,8 @@ const TIERS: Tier[] = [
     tag: "2 to 20-lawyer chambers",
     price: "₹2,499",
     unit: "/seat/mo · min 2 seats",
-    cta: "Talk to onboarding",
-    href: "https://app.vakeelos.com/sign-up",
+    cta: "Join the waitlist",
+    href: "/waitlist",
     blurb:
       "Everything in Solo, plus team workflows, unlimited VakeelBrain, client portal, custom invoicing.",
   },
@@ -255,7 +255,7 @@ export default function PricingPage() {
               </p>
 
               <div className="mt-7">
-                <Link href={t.href} target={t.href.startsWith("http") ? "_blank" : undefined}>
+                <Link href={t.href}>
                   {t.highlight ? (
                     <Button variant="saffron" className="w-full">
                       {t.cta}
@@ -415,13 +415,9 @@ export default function PricingPage() {
               </p>
             </div>
             <div className="col-span-12 md:col-span-4 md:text-right">
-              <Link
-                href="https://app.vakeelos.com/sign-up"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <Link href="/waitlist">
                 <Button variant="saffron" size="lg">
-                  Start 30-day trial
+                  Join the waitlist
                 </Button>
               </Link>
             </div>

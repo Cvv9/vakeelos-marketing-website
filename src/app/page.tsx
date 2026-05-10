@@ -43,19 +43,15 @@ function ClosingCta() {
               numbers, leave with a quiet docket.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link
-                href="https://app.vakeelos.com/sign-up"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <Link href="/waitlist">
                 <Button size="lg" variant="ink" className="press w-full sm:w-auto">
-                  Start free trial
+                  Join the waitlist
                   <ArrowUpRight className="ml-1.5 h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/pricing">
+              <Link href="/contact">
                 <Button size="lg" variant="outline" className="press w-full sm:w-auto">
-                  See pricing
+                  Contact us
                 </Button>
               </Link>
             </div>
