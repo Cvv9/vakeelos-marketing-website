@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# tooling — local-only directories
+.claude/worktrees/
+.firecrawl/
+
+# package manager — this project uses pnpm; avoid stray npm lockfile
+package-lock.json
