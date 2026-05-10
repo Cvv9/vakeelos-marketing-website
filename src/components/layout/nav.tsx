@@ -74,15 +74,15 @@ export function Nav() {
             }`}
           >
             {/* Desktop — symmetric layout with centered V logo (no wordmark) */}
-            <div className="hidden grid-cols-[1fr_auto_1fr] items-center gap-10 md:grid">
-              {/* Left links — smaller, hug the centre */}
-              <nav className="flex items-center justify-self-end gap-6 lg:gap-7">
+            <div className="hidden grid-cols-[1fr_auto_1fr] items-center gap-12 md:grid">
+              {/* Left links */}
+              <nav className="flex items-center justify-self-end gap-7 lg:gap-9">
                 {LEFT_LINKS.map((l, i) => (
-                  <span key={l.href} className="flex items-center gap-6 lg:gap-7">
-                    {i > 0 && <span aria-hidden className="block h-2.5 w-px bg-rule-strong opacity-50" />}
+                  <span key={l.href} className="flex items-center gap-7 lg:gap-9">
+                    {i > 0 && <span aria-hidden className="block h-3 w-px bg-rule-strong opacity-50" />}
                     <Link
                       href={l.href}
-                      className={`text-[12.5px] tracking-wide transition-colors ${
+                      className={`text-[15px] tracking-wide transition-colors ${
                         isActive(l.href)
                           ? "text-saffron"
                           : "text-ink-2 hover:text-ink"
@@ -94,7 +94,7 @@ export function Nav() {
                 ))}
               </nav>
 
-              {/* Center V logo — big at rest, compact in the pill */}
+              {/* Center V logo — generous at rest, still readable in the pill */}
               <Link
                 href="/"
                 className="group flex items-center justify-self-center transition-all duration-300 ease-out"
@@ -103,23 +103,23 @@ export function Nav() {
                 <Image
                   src="/logo-glyph.png"
                   alt="VakeelOS"
-                  width={192}
-                  height={192}
+                  width={256}
+                  height={256}
                   priority
                   className={`block rounded-[3px] transition-all duration-300 ease-out ${
-                    stuck ? "h-10 w-10 lg:h-12 lg:w-12" : "h-16 w-16 lg:h-20 lg:w-20"
+                    stuck ? "h-14 w-14 lg:h-16 lg:w-16" : "h-28 w-28 lg:h-32 lg:w-32"
                   }`}
                 />
               </Link>
 
-              {/* Right links — smaller, hug the centre */}
-              <nav className="flex items-center justify-self-start gap-6 lg:gap-7">
+              {/* Right links */}
+              <nav className="flex items-center justify-self-start gap-7 lg:gap-9">
                 {RIGHT_LINKS.map((l, i) => (
-                  <span key={l.href} className="flex items-center gap-6 lg:gap-7">
-                    {i > 0 && <span aria-hidden className="block h-2.5 w-px bg-rule-strong opacity-50" />}
+                  <span key={l.href} className="flex items-center gap-7 lg:gap-9">
+                    {i > 0 && <span aria-hidden className="block h-3 w-px bg-rule-strong opacity-50" />}
                     <Link
                       href={l.href}
-                      className={`text-[12.5px] tracking-wide transition-colors ${
+                      className={`text-[15px] tracking-wide transition-colors ${
                         isActive(l.href)
                           ? "text-saffron"
                           : "text-ink-2 hover:text-ink"
@@ -141,11 +141,11 @@ export function Nav() {
               <Image
                 src="/logo-glyph.png"
                 alt="VakeelOS"
-                width={192}
-                height={192}
+                width={256}
+                height={256}
                 priority
                 className={`block rounded-[3px] transition-all duration-300 ease-out ${
-                  stuck ? "h-9 w-9" : "h-14 w-14"
+                  stuck ? "h-12 w-12" : "h-20 w-20"
                 }`}
               />
             </Link>
