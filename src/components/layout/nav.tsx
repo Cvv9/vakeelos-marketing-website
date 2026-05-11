@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -118,12 +117,12 @@ export function Nav() {
                 className="group flex items-center justify-self-center transition-all duration-300 ease-out"
                 aria-label="VakeelOS — home"
               >
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src="/logo-glyph.png"
                   alt="VakeelOS"
                   width={256}
                   height={256}
-                  priority
                   className={`block rounded-[3px] transition-all duration-300 ease-out ${
                     stuck ? "h-9 w-9 lg:h-10 lg:w-10" : "h-28 w-28 lg:h-32 lg:w-32"
                   }`}
@@ -163,12 +162,12 @@ export function Nav() {
               className="group mx-auto flex w-fit items-center md:hidden"
               aria-label="VakeelOS — home"
             >
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/logo-glyph.png"
                 alt="VakeelOS"
                 width={256}
                 height={256}
-                priority
                 className={`block rounded-[3px] transition-all duration-300 ease-out ${
                   stuck ? "h-9 w-9" : "h-20 w-20"
                 }`}
