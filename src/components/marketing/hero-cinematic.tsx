@@ -131,18 +131,38 @@ function Stat({ value, label }: { value: string; label: string }) {
 }
 
 function VideoTile() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   return (
     <div className="video-tile mask-rise relative aspect-[16/10] w-full overflow-hidden rounded-[3px] border border-rule">
-      <CinematicStill />
+      <video
+        ref={videoRef}
+        poster="/hero-poster.jpg"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-label="A Tuesday at the bar — VakeelOS daily loop"
+        className="absolute inset-0 z-[1] h-full w-full object-cover"
+      >
+        <source src="/hero.mp4" type="video/mp4" />
+        <img
+          src="/hero.gif"
+          alt="VakeelOS daily loop — scattered cause-papers, sync, draft, morning brief, calm chambers"
+          className="h-full w-full object-cover"
+        />
+      </video>
+
       <div className="film-grain" aria-hidden />
 
-      <div className="absolute inset-0 z-10 flex flex-col">
+      <div className="pointer-events-none absolute inset-0 z-10 flex flex-col">
         <div className="flex items-center justify-between px-5 pt-4">
-          <p className="mono text-[10.5px] uppercase tracking-[0.22em] text-paper/70">
+          <p className="mono text-[10.5px] uppercase tracking-[0.22em] text-ink/75">
             A Tuesday at the bar
           </p>
-          <p className="mono text-[10.5px] uppercase tracking-[0.22em] text-paper/70">
-            04:18 / Sound on
+          <p className="mono text-[10.5px] uppercase tracking-[0.22em] text-ink/75">
+            00:10 · Loop, muted
           </p>
         </div>
 
@@ -151,18 +171,24 @@ function VideoTile() {
         <div className="flex items-end justify-between px-5 pb-5">
           <button
             type="button"
-            className="float-soft press group flex items-center gap-3 rounded-full border border-paper/25 bg-paper/10 px-4 py-2 text-paper backdrop-blur-sm transition-colors hover:border-paper/55 hover:bg-paper/15"
+            onClick={() => {
+              const v = videoRef.current;
+              if (!v) return;
+              v.currentTime = 0;
+              void v.play();
+            }}
+            className="float-soft press group pointer-events-auto flex items-center gap-3 rounded-full border border-ink/25 bg-ink/10 px-4 py-2 text-ink backdrop-blur-sm transition-colors hover:border-ink/55 hover:bg-ink/15"
           >
-            <span className="grid h-7 w-7 place-items-center rounded-full bg-paper text-ink transition-transform group-hover:scale-105">
+            <span className="grid h-7 w-7 place-items-center rounded-full bg-ink text-paper transition-transform group-hover:scale-105">
               <Play className="h-3 w-3 translate-x-[1px]" fill="currentColor" />
             </span>
             <span className="text-[12.5px] font-medium tracking-tight">
-              Play the intro
+              Replay
             </span>
           </button>
 
           <div
-            className="flex items-center gap-2 text-paper/65"
+            className="flex items-center gap-2 text-ink/65"
             style={{ ['--float-delay' as string]: '1.2s' }}
           >
             <Volume2 className="float-icon h-3.5 w-3.5" />
@@ -173,129 +199,15 @@ function VideoTile() {
         </div>
       </div>
 
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3 text-paper/75">
+      <div className="pointer-events-none absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 items-center gap-3 text-ink/75">
         <span className="mono text-[10px] uppercase tracking-[0.22em]">
           Causelist · 06:30 IST
         </span>
-        <span className="block h-3 w-px bg-paper/25" />
+        <span className="block h-3 w-px bg-ink/30" />
         <span className="mono text-[10px] uppercase tracking-[0.22em]">
           APHC W.P. 4711/2025
         </span>
       </div>
-
-      <BackgroundLines />
     </div>
-  );
-}
-
-function CinematicStill() {
-  return (
-    <div className="absolute inset-0 z-[1] flex items-center justify-center px-6">
-      <div className="lift-in relative w-full max-w-[440px] rounded-[2px] border border-ink-3/25 bg-ink/[0.03] px-7 py-6 backdrop-blur-[2px]">
-        <div className="flex items-center justify-between">
-          <p className="mono text-[10px] uppercase tracking-[0.22em] text-ink-3">
-            Morning brief
-          </p>
-          <p className="mono text-[10px] uppercase tracking-[0.22em] text-ink-3">
-            Tue · 12 May
-          </p>
-        </div>
-
-        <div className="mt-5 h-px w-full bg-ink-3/30" />
-
-        <ul className="mt-4 space-y-3 font-mono text-[12px] tracking-tight text-ink-2">
-          <li
-            className="hero-rise flex items-baseline gap-3"
-            style={{ ['--delay' as string]: '0.6s' }}
-          >
-            <span className="text-ink-4">01</span>
-            <span className="w-12 text-ink-3">APHC</span>
-            <span className="flex-1">W.P. 4711/2025</span>
-            <span className="text-ink-3">10:30</span>
-          </li>
-          <li
-            className="hero-rise relative flex items-baseline gap-3 text-ink"
-            style={{ ['--delay' as string]: '0.75s' }}
-          >
-            <span className="text-ink-3">02</span>
-            <span className="w-12 text-ink-2">TSHC</span>
-            <span className="flex-1">Crl.A. 882/2025</span>
-            <span className="text-ink-2">11:15</span>
-            <span
-              className="wipe-in absolute -left-2 right-0 -bottom-1 h-px"
-              style={{
-                background: "var(--brand-deep)",
-                opacity: 0.9,
-                transformOrigin: "left",
-                animationDelay: "1s",
-              }}
-              aria-hidden
-            />
-          </li>
-          <li
-            className="hero-rise flex items-baseline gap-3"
-            style={{ ['--delay' as string]: '0.9s' }}
-          >
-            <span className="text-ink-4">03</span>
-            <span className="w-12 text-ink-3">NCLT</span>
-            <span className="flex-1">IB 1422/2025</span>
-            <span className="text-ink-3">02:00</span>
-          </li>
-          <li
-            className="hero-rise flex items-baseline gap-3"
-            style={{ ['--delay' as string]: '1.05s' }}
-          >
-            <span className="text-ink-4">04</span>
-            <span className="w-12 text-ink-3">APHC</span>
-            <span className="flex-1">W.P. 5102/2025</span>
-            <span className="text-ink-3">03:45</span>
-          </li>
-        </ul>
-
-        <div className="mt-5 h-px w-full bg-ink-3/30" />
-
-        <div className="mt-3 flex items-center justify-between">
-          <p className="mono text-[10px] uppercase tracking-[0.22em] text-ink-3">
-            4 hearings · synced
-          </p>
-          <p
-            className="mono text-[10px] uppercase tracking-[0.22em]"
-            style={{ color: "var(--brand-deep)" }}
-          >
-            06:00 IST
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function BackgroundLines() {
-  return (
-    <svg
-      aria-hidden
-      viewBox="0 0 800 500"
-      className="absolute inset-0 z-[1] h-full w-full opacity-25"
-      preserveAspectRatio="none"
-    >
-      <defs>
-        <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="oklch(0.99 0 0)" stopOpacity="0" />
-          <stop offset="50%" stopColor="oklch(0.99 0 0)" stopOpacity="0.5" />
-          <stop offset="100%" stopColor="oklch(0.99 0 0)" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      {Array.from({ length: 9 }).map((_, i) => (
-        <line
-          key={i}
-          x1="0"
-          x2="800"
-          y1={50 + i * 50}
-          y2={50 + i * 50}
-          stroke="url(#line)"
-          strokeWidth="0.6"
-        />
-      ))}
-    </svg>
   );
 }
