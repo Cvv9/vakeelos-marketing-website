@@ -24,6 +24,7 @@ export function Nav() {
   const pathname = usePathname();
 
   const isActive = (href: string) => {
+    if (pathname !== "/") return pathname === href;
     if (href === "/#services") return activeSection === "services";
     if (href === "/#workflow") return activeSection === "workflow";
     return pathname === href;
@@ -37,13 +38,16 @@ export function Nav() {
   }, []);
 
   useEffect(() => {
-    if (pathname !== "/") { setActiveSection(""); return; }
+    if (pathname !== "/") return;
     const ids = ["services", "workflow"];
     const observers = ids.map((id) => {
       const el = document.getElementById(id);
       if (!el) return null;
       const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id);
+          else setActiveSection((curr) => (curr === id ? "" : curr));
+        },
         { threshold: 0.25 }
       );
       obs.observe(el);
@@ -63,14 +67,17 @@ export function Nav() {
         <ArrowUpRight className="h-3 w-3 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </Link>
 
-      {/* Sticky main nav — naked at top, glassmorphic pill on scroll */}
-      <header className="sticky top-0 z-50">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+      {/* Sticky main nav — naked at top, glassmorphic pill on scroll.
+          Outer slot height is locked so the pill can shrink without
+          reflowing the page (prevents CLS). pointer-events-none on the
+          slot lets the user click underlying content where the pill isn't. */}
+      <header className="pointer-events-none sticky top-0 z-50">
+        <div className="pointer-events-none mx-auto flex h-[136px] max-w-7xl items-center justify-center px-6 md:h-[168px] lg:h-[200px] lg:px-10">
           <div
-            className={`relative transition-all duration-300 ease-out ${
+            className={`pointer-events-auto relative transition-all duration-300 ease-out ${
               stuck
-                ? "my-3 mx-auto w-fit rounded-full bg-paper/55 px-5 py-2 ring-1 ring-inset ring-white/15 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.55)] backdrop-blur-2xl backdrop-saturate-150 lg:my-4 lg:px-7 lg:py-2"
-                : "py-7 lg:py-9"
+                ? "mx-auto w-fit rounded-full bg-paper/55 px-5 py-2 ring-1 ring-inset ring-white/15 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.55)] backdrop-blur-2xl backdrop-saturate-150 lg:px-7 lg:py-2"
+                : "w-full"
             }`}
           >
             {/* Desktop — symmetric layout with centered V logo (no wordmark) */}

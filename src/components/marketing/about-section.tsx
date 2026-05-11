@@ -105,7 +105,7 @@ export function AboutSection() {
                   </span>
                 </figcaption>
                 <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between px-5 pb-5">
-                  <span className="mono text-[10px] uppercase tracking-[0.22em] text-paper/55">
+                  <span className="mono text-[10px] uppercase tracking-[0.22em] text-paper/75">
                     APHC · W.P. 4711/2025
                   </span>
                   <span className="block h-1.5 w-1.5 rounded-full bg-saffron" aria-hidden />

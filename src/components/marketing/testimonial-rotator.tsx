@@ -59,10 +59,10 @@ export function TestimonialRotator() {
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
         <div className="flex items-center justify-between">
-          <p className="mono text-[11px] uppercase tracking-[0.22em] text-paper/55">
+          <p className="mono text-[11px] uppercase tracking-[0.22em] text-paper/75">
             From the bar
           </p>
-          <p className="mono text-[11px] uppercase tracking-[0.22em] text-paper/55">
+          <p className="mono text-[11px] uppercase tracking-[0.22em] text-paper/75">
             {String(active + 1).padStart(2, "0")} / {String(TESTIMONIALS.length).padStart(2, "0")}
           </p>
         </div>
@@ -86,7 +86,7 @@ export function TestimonialRotator() {
               <span className="text-[16px] font-semibold tracking-tight text-paper">
                 {t.name}
               </span>
-              <span className="mono text-[11px] uppercase tracking-[0.22em] text-paper/55">
+              <span className="mono text-[11px] uppercase tracking-[0.22em] text-paper/75">
                 {t.role} — {t.firm}
               </span>
             </figcaption>

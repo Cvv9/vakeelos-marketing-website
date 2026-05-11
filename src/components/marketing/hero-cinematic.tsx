@@ -183,7 +183,7 @@ function VideoTile() {
         </div>
       </div>
 
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3 text-paper/55">
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3 text-paper/75">
         <span className="mono text-[10px] uppercase tracking-[0.22em]">
           Causelist · 06:30 IST
         </span>

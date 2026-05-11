@@ -270,7 +270,7 @@ export default function PricingPage() {
               <p
                 className={
                   "mono mt-4 text-[11px] font-medium uppercase tracking-[0.16em] " +
-                  (t.highlight ? "text-paper/75" : "text-ink-3")
+                  (t.highlight ? "text-paper/85" : "text-ink-3")
                 }
               >
                 30-day trial · cancel any time
