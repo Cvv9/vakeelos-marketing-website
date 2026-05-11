@@ -34,18 +34,29 @@ export function AboutSection() {
       {/* ── HEADER ─────────────────────────────────────────────── */}
       <section className="border-b border-rule">
         <div className="mx-auto max-w-7xl px-6 pt-20 pb-16 lg:px-10 lg:pt-28 lg:pb-24">
-          <p className="mono text-[11px] uppercase tracking-[0.22em] text-ink-3">
-            About VakeelOS
-          </p>
-          <h1 className="display-tight mt-6 max-w-4xl text-[44px] leading-[0.96] tracking-tight text-ink sm:text-[72px] lg:text-[96px]">
-            Built for the bar.{" "}
-            <span className="accent">By people who listened.</span>
-          </h1>
-          <p className="mt-8 max-w-xl text-[17px] leading-[1.65] text-ink-2">
-            VakeelOS is a practice management suite designed from first principles
-            around how Indian advocates actually work — not how Western LegalTech
-            assumes they do.
-          </p>
+          <div className="flex items-start justify-between gap-8">
+            <div>
+              <p className="mono text-[11px] uppercase tracking-[0.22em] text-ink-3">
+                About VakeelOS
+              </p>
+              <h1 className="display-tight mt-6 max-w-4xl text-[44px] leading-[0.96] tracking-tight text-ink sm:text-[72px] lg:text-[96px]">
+                Built for the bar.{" "}
+                <span className="accent">By people who listened.</span>
+              </h1>
+              <p className="mt-8 max-w-xl text-[17px] leading-[1.65] text-ink-2">
+                VakeelOS is a practice management suite designed from first principles
+                around how Indian advocates actually work — not how Western LegalTech
+                assumes they do.
+              </p>
+            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/brand-seal.png"
+              alt=""
+              aria-hidden
+              className="hidden lg:block h-28 w-28 shrink-0 spin-slow opacity-75 mt-2"
+            />
+          </div>
         </div>
       </section>
 
@@ -84,24 +95,19 @@ export function AboutSection() {
 
             <div className="lg:col-span-6 lg:col-start-7">
               <figure className="relative aspect-[3/4] w-full overflow-hidden rounded-[3px] border border-rule">
-                <video
-                  className="absolute inset-0 z-0 h-full w-full object-cover"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster="/about-file-poster.jpg"
-                  aria-hidden
-                >
-                  <source src="/about-file.mp4" type="video/mp4" />
-                </video>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/about-desk.png"
+                  alt="A lawyer's desk — lamp, documents, pen"
+                  className="absolute inset-0 z-0 h-full w-full object-cover object-center"
+                />
                 <div className="film-grain" aria-hidden />
                 <figcaption className="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-5 pt-4">
                   <span className="mono text-[10.5px] uppercase tracking-[0.22em] text-paper/65">
                     The brief — opening
                   </span>
                   <span className="mono text-[10.5px] uppercase tracking-[0.22em] text-paper/65">
-                    08 s · loop
+                    Late night · in chambers
                   </span>
                 </figcaption>
                 <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between px-5 pb-5">

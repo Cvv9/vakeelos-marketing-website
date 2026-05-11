@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import Image from "next/image";
 import { Quote } from "lucide-react";
 
 const Brand = () => (
@@ -9,11 +10,12 @@ const Brand = () => (
   </>
 );
 
-const TESTIMONIALS: { name: string; role: string; firm: string; quote: ReactNode }[] = [
+const TESTIMONIALS: { name: string; role: string; firm: string; photo: string | null; quote: ReactNode }[] = [
   {
     name: "Adv. Sneha Reddy",
     role: "Counsel",
     firm: "Reddy & Associates · Hyderabad",
+    photo: "/advocate-female.png",
     quote: (
       <>
         I used to keep three WhatsApp groups, two notebooks, and a printed causelist on my dashboard. <Brand /> replaced all of that with one quiet screen — and the 06:30 sync now wakes me before my clerk does.
@@ -24,6 +26,7 @@ const TESTIMONIALS: { name: string; role: string; firm: string; quote: ReactNode
     name: "Adv. Aarav Mehta",
     role: "Solo Practitioner",
     firm: "Mehta Chambers · Mumbai",
+    photo: "/advocate-male-1.png",
     quote:
       "Drafting a Section 138 notice used to take an evening. With the AI Drafter it’s a coffee. The numbers — both the case numbers and the invoices — finally tally on the first try.",
   },
@@ -31,6 +34,7 @@ const TESTIMONIALS: { name: string; role: string; firm: string; quote: ReactNode
     name: "Adv. Priya Iyer",
     role: "Partner",
     firm: "Iyer & Khanna LLP · Bengaluru",
+    photo: null,
     quote: (
       <>
         What I needed was a system that respected how Indian courts actually work. <Brand /> is the first software I’ve seen that doesn’t make me translate my practice into someone else’s vocabulary.
@@ -68,21 +72,52 @@ export function TestimonialRotator() {
         </div>
 
         <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-2">
-            <Quote className="h-12 w-12 text-saffron" strokeWidth={1.5} />
+          {/* Portrait column — desktop only */}
+          <div className="hidden lg:block lg:col-span-3">
+            {t.photo ? (
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[3px] border border-paper/20">
+                <Image
+                  src={t.photo}
+                  fill
+                  alt=""
+                  aria-hidden
+                  className="object-cover object-top"
+                  sizes="25vw"
+                />
+              </div>
+            ) : (
+              <div className="flex aspect-[3/4] w-full items-center justify-center rounded-[3px] border border-paper/10 bg-paper/5">
+                <Quote className="h-10 w-10 text-paper/15" strokeWidth={1} />
+              </div>
+            )}
           </div>
-          <div className="lg:col-span-10">
+
+          {/* Quote + text */}
+          <div className="lg:col-span-9">
+            <Quote className="h-10 w-10 text-saffron" strokeWidth={1.5} />
             <blockquote
               key={`q-${active}`}
-              className="display-tight pull-up text-[28px] font-medium leading-[1.18] tracking-tight text-paper sm:text-[40px] lg:text-[52px]"
+              className="display-tight pull-up mt-6 text-[28px] font-medium leading-[1.18] tracking-tight text-paper sm:text-[40px] lg:text-[50px]"
             >
               &ldquo;{t.quote}&rdquo;
             </blockquote>
 
             <figcaption
               key={t.name}
-              className="pull-up mt-12 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-t border-paper/15 pt-6"
+              className="pull-up mt-10 flex flex-wrap items-center gap-x-4 gap-y-3 border-t border-paper/15 pt-6"
             >
+              {t.photo && (
+                <div className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full border border-paper/25 lg:hidden">
+                  <Image
+                    src={t.photo}
+                    fill
+                    alt=""
+                    aria-hidden
+                    className="object-cover object-top"
+                    sizes="36px"
+                  />
+                </div>
+              )}
               <span className="text-[16px] font-semibold tracking-tight text-paper">
                 {t.name}
               </span>

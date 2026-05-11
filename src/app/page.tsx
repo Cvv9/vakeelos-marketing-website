@@ -42,7 +42,15 @@ function ClosingCta() {
               Three plans. UPI billing. Hosted in India by default. Bring your CNR
               numbers, leave with a quiet docket.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-6 flex items-center gap-4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/badge-made-in-india.png"
+                alt="Made in India · Hosted in India"
+                className="h-16 w-16 opacity-85"
+              />
+            </div>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link href="/waitlist">
                 <Button size="lg" variant="ink" className="press w-full sm:w-auto">
                   Join the waitlist

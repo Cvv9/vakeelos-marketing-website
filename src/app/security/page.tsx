@@ -241,6 +241,13 @@ export default function SecurityPage() {
 
       {/* QUOTE */}
       <section className="mx-auto max-w-5xl px-6 py-20 text-center md:py-24 lg:px-10">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/brand-shield.png"
+          alt=""
+          aria-hidden
+          className="mx-auto mb-8 h-24 w-24 opacity-80"
+        />
         <p className="accent text-[24px] leading-[1.2] text-ink md:text-[34px]">
           &ldquo;A clerk&rsquo;s memory is the original audit log. Ours just doesn&rsquo;t walk
           out at five o&rsquo;clock.&rdquo;
