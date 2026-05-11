@@ -34,29 +34,18 @@ export function AboutSection() {
       {/* ── HEADER ─────────────────────────────────────────────── */}
       <section className="border-b border-rule">
         <div className="mx-auto max-w-7xl px-6 pt-20 pb-16 lg:px-10 lg:pt-28 lg:pb-24">
-          <div className="flex items-start justify-between gap-8">
-            <div>
-              <p className="mono text-[11px] uppercase tracking-[0.22em] text-ink-3">
-                About VakeelOS
-              </p>
-              <h1 className="display-tight mt-6 max-w-4xl text-[44px] leading-[0.96] tracking-tight text-ink sm:text-[72px] lg:text-[96px]">
-                Built for the bar.{" "}
-                <span className="accent">By people who listened.</span>
-              </h1>
-              <p className="mt-8 max-w-xl text-[17px] leading-[1.65] text-ink-2">
-                VakeelOS is a practice management suite designed from first principles
-                around how Indian advocates actually work — not how Western LegalTech
-                assumes they do.
-              </p>
-            </div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/brand-seal.png"
-              alt=""
-              aria-hidden
-              className="hidden lg:block h-28 w-28 shrink-0 spin-slow opacity-75 mt-2"
-            />
-          </div>
+          <p className="mono text-[11px] uppercase tracking-[0.22em] text-ink-3">
+            About VakeelOS
+          </p>
+          <h1 className="display-tight mt-6 max-w-4xl text-[44px] leading-[0.96] tracking-tight text-ink sm:text-[72px] lg:text-[96px]">
+            Built for the bar.{" "}
+            <span className="accent">By people who listened.</span>
+          </h1>
+          <p className="mt-8 max-w-xl text-[17px] leading-[1.65] text-ink-2">
+            VakeelOS is a practice management suite designed from first principles
+            around how Indian advocates actually work — not how Western LegalTech
+            assumes they do.
+          </p>
         </div>
       </section>
 

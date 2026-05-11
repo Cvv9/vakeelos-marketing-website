@@ -133,17 +133,7 @@ function Stat({ value, label }: { value: string; label: string }) {
 function VideoTile() {
   return (
     <div className="video-tile mask-rise relative aspect-[16/10] w-full overflow-hidden rounded-[3px] border border-rule">
-      <video
-        className="absolute inset-0 z-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster="/hero-poster.jpg"
-        aria-hidden
-      >
-        <source src="/hero.mp4" type="video/mp4" />
-      </video>
+      <CinematicStill />
       <div className="film-grain" aria-hidden />
 
       <div className="absolute inset-0 z-10 flex flex-col">
@@ -194,6 +184,88 @@ function VideoTile() {
       </div>
 
       <BackgroundLines />
+    </div>
+  );
+}
+
+function CinematicStill() {
+  return (
+    <div className="absolute inset-0 z-[1] flex items-center justify-center px-6">
+      <div className="lift-in relative w-full max-w-[440px] rounded-[2px] border border-ink-3/25 bg-ink/[0.03] px-7 py-6 backdrop-blur-[2px]">
+        <div className="flex items-center justify-between">
+          <p className="mono text-[10px] uppercase tracking-[0.22em] text-ink-3">
+            Morning brief
+          </p>
+          <p className="mono text-[10px] uppercase tracking-[0.22em] text-ink-3">
+            Tue · 12 May
+          </p>
+        </div>
+
+        <div className="mt-5 h-px w-full bg-ink-3/30" />
+
+        <ul className="mt-4 space-y-3 font-mono text-[12px] tracking-tight text-ink-2">
+          <li
+            className="hero-rise flex items-baseline gap-3"
+            style={{ ['--delay' as string]: '0.6s' }}
+          >
+            <span className="text-ink-4">01</span>
+            <span className="w-12 text-ink-3">APHC</span>
+            <span className="flex-1">W.P. 4711/2025</span>
+            <span className="text-ink-3">10:30</span>
+          </li>
+          <li
+            className="hero-rise relative flex items-baseline gap-3 text-ink"
+            style={{ ['--delay' as string]: '0.75s' }}
+          >
+            <span className="text-ink-3">02</span>
+            <span className="w-12 text-ink-2">TSHC</span>
+            <span className="flex-1">Crl.A. 882/2025</span>
+            <span className="text-ink-2">11:15</span>
+            <span
+              className="wipe-in absolute -left-2 right-0 -bottom-1 h-px"
+              style={{
+                background: "var(--brand-deep)",
+                opacity: 0.9,
+                transformOrigin: "left",
+                animationDelay: "1s",
+              }}
+              aria-hidden
+            />
+          </li>
+          <li
+            className="hero-rise flex items-baseline gap-3"
+            style={{ ['--delay' as string]: '0.9s' }}
+          >
+            <span className="text-ink-4">03</span>
+            <span className="w-12 text-ink-3">NCLT</span>
+            <span className="flex-1">IB 1422/2025</span>
+            <span className="text-ink-3">02:00</span>
+          </li>
+          <li
+            className="hero-rise flex items-baseline gap-3"
+            style={{ ['--delay' as string]: '1.05s' }}
+          >
+            <span className="text-ink-4">04</span>
+            <span className="w-12 text-ink-3">APHC</span>
+            <span className="flex-1">W.P. 5102/2025</span>
+            <span className="text-ink-3">03:45</span>
+          </li>
+        </ul>
+
+        <div className="mt-5 h-px w-full bg-ink-3/30" />
+
+        <div className="mt-3 flex items-center justify-between">
+          <p className="mono text-[10px] uppercase tracking-[0.22em] text-ink-3">
+            4 hearings · synced
+          </p>
+          <p
+            className="mono text-[10px] uppercase tracking-[0.22em]"
+            style={{ color: "var(--brand-deep)" }}
+          >
+            06:00 IST
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

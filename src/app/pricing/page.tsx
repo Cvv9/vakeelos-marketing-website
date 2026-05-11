@@ -278,9 +278,18 @@ export default function PricingPage() {
             </div>
           ))}
         </div>
-        <p className="mono mt-6 text-[11.5px] font-medium uppercase tracking-[0.18em] text-ink-3">
-          Annual plans = 2 months free · Bar association partners get a further 40% off · Founder-led onboarding for Firms
-        </p>
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-6">
+          <p className="mono text-[11.5px] font-medium uppercase tracking-[0.18em] text-ink-3">
+            Annual plans = 2 months free · Bar association partners get a further 40% off · Founder-led onboarding for Firms
+          </p>
+          <div className="flex items-center gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/razorpay-badge.png" alt="Payments by Razorpay · INR · UPI" className="h-16 w-16 shrink-0" />
+            <span className="mono max-w-[160px] text-[11px] font-medium uppercase leading-snug tracking-[0.18em] text-ink-3">
+              INR-native checkout · Razorpay UPI
+            </span>
+          </div>
+        </div>
       </section>
 
       {/* COMPARISON */}

@@ -31,10 +31,10 @@ const TESTIMONIALS: { name: string; role: string; firm: string; photo: string | 
       "Drafting a Section 138 notice used to take an evening. With the AI Drafter it’s a coffee. The numbers — both the case numbers and the invoices — finally tally on the first try.",
   },
   {
-    name: "Adv. Priya Iyer",
-    role: "Partner",
+    name: "Adv. Rohan Khanna",
+    role: "Senior Partner",
     firm: "Iyer & Khanna LLP · Bengaluru",
-    photo: null,
+    photo: "/advocate-male-2.png",
     quote: (
       <>
         What I needed was a system that respected how Indian courts actually work. <Brand /> is the first software I’ve seen that doesn’t make me translate my practice into someone else’s vocabulary.

@@ -165,6 +165,33 @@ export default function SecurityPage() {
         </div>
       </section>
 
+      {/* COMPLIANCE SEALS */}
+      <section id="trust-marks" className="border-b border-rule">
+        <div className="mx-auto max-w-7xl px-6 py-14 md:py-16 lg:px-10">
+          <div className="grid grid-cols-12 items-center gap-10">
+            <div className="col-span-12 md:col-span-5">
+              <div className="mono text-[11px] font-medium uppercase tracking-[0.22em] text-ink-3">
+                Trust marks · verified before launch
+              </div>
+              <p className="mt-4 text-[14.5px] leading-relaxed text-ink-2">
+                Two verifications every chamber asks about — Bar Council enrolment for the advocate,
+                and DPDPA alignment for the data. We check both before you onboard.
+              </p>
+            </div>
+            <div className="col-span-12 md:col-span-7">
+              <div className="flex flex-wrap items-center justify-start gap-x-10 gap-y-6 md:justify-end">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/bar-council-seal.png" alt="Bar Council Verified" className="h-24 w-24 md:h-28 md:w-28" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/dpdpa-shield.png" alt="DPDPA Compliant" className="h-24 w-24 md:h-28 md:w-28" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/badge-made-in-india.png" alt="Made in India" className="h-24 w-24 md:h-28 md:w-28" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* PILLARS */}
       <section className="mx-auto max-w-7xl px-6 py-20 md:py-28 lg:px-10">
         <div className="space-y-px bg-rule">
@@ -277,18 +304,9 @@ export default function SecurityPage() {
             </div>
             <div className="col-span-12 md:col-span-4 md:text-right">
               <div className="flex flex-wrap gap-3 md:justify-end">
-                <Link href="mailto:security@vakeelos.in">
+                <Link href="/contact">
                   <Button variant="saffron" size="lg" className="gap-2">
-                    Talk to security <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
-                <Link href="/pricing">
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="border-paper/25 text-paper hover:border-paper/50 hover:bg-paper/10"
-                  >
-                    See enterprise
+                    Talk to us <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>
               </div>
