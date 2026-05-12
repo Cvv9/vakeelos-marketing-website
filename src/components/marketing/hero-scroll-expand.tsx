@@ -72,8 +72,8 @@ export function HeroScrollExpand() {
     };
   }, [scrollProgress, mediaFullyExpanded, touchStartY]);
 
-  const mediaW = 300 + scrollProgress * (isMobile ? 650 : 1250);
-  const mediaH = 400 + scrollProgress * (isMobile ? 200 : 400);
+  const mediaW = 320 + scrollProgress * (isMobile ? 630 : 1230);
+  const mediaH = 240 + scrollProgress * (isMobile ? 360 : 560);
   const textX = scrollProgress * (isMobile ? 180 : 150);
 
   return (
@@ -98,7 +98,9 @@ export function HeroScrollExpand() {
           </motion.div>
 
           <div className="w-full flex flex-col items-center relative z-10">
-            <div className="flex flex-col items-center justify-center w-full h-[100dvh] relative gap-2">
+
+            {/* Full-viewport scroll-expand stage */}
+            <div className="relative w-full h-[100dvh]">
 
               {/* Expanding hero video — absolutely centered */}
               <div
@@ -130,37 +132,58 @@ export function HeroScrollExpand() {
                 />
               </div>
 
-              {/* Hint line — flies apart horizontally on scroll */}
-              <div className="flex items-center gap-8 relative z-10">
+              {/* VakeelOS wordmark — anchored top, splits left/right on scroll */}
+              <div className="absolute top-[22%] inset-x-0 flex items-center justify-center z-10">
                 <p
-                  className="mono text-[10.5px] uppercase tracking-[0.22em] text-ink/55"
+                  className="display-tight text-[36px] sm:text-[52px] lg:text-[68px] font-medium tracking-tight leading-none text-ink"
                   style={{ transform: `translateX(-${textX}vw)` }}
                 >
-                  A Tuesday at the bar
+                  Vakeel
                 </p>
-                <span className="block h-3 w-px bg-ink/20" />
                 <p
-                  className="mono text-[10.5px] uppercase tracking-[0.22em] text-ink/55"
+                  className="display-tight text-[36px] sm:text-[52px] lg:text-[68px] font-medium tracking-tight leading-none text-ink"
                   style={{ transform: `translateX(${textX}vw)` }}
                 >
-                  Scroll to expand
+                  OS
                 </p>
               </div>
 
-              {/* Title — splits apart on scroll */}
-              <div className="flex flex-col items-center text-center w-full relative z-10">
-                <h1
-                  className="display-tight text-[40px] sm:text-[68px] lg:text-[96px] font-medium tracking-tight leading-[0.96] text-ink"
-                  style={{ transform: `translateX(-${textX}vw)` }}
-                >
-                  Practice management,
-                </h1>
-                <h1
-                  className="display-tight text-[40px] sm:text-[68px] lg:text-[96px] font-medium tracking-tight leading-[0.96] text-ink"
-                  style={{ transform: `translateX(${textX}vw)` }}
-                >
-                  for the <span className="accent">Indian bar.</span>
-                </h1>
+              {/* Hint + title — anchored bottom, each line flies apart on scroll */}
+              <div className="absolute bottom-[4%] inset-x-0 flex flex-col items-center gap-3 z-10">
+
+                {/* Hint line */}
+                <div className="flex items-center gap-8">
+                  <p
+                    className="mono text-[10.5px] uppercase tracking-[0.22em] text-ink/55"
+                    style={{ transform: `translateX(-${textX}vw)` }}
+                  >
+                    A Tuesday at the bar
+                  </p>
+                  <span className="block h-3 w-px bg-ink/20" />
+                  <p
+                    className="mono text-[10.5px] uppercase tracking-[0.22em] text-ink/55"
+                    style={{ transform: `translateX(${textX}vw)` }}
+                  >
+                    Scroll to expand
+                  </p>
+                </div>
+
+                {/* Title */}
+                <div className="flex flex-col items-center text-center w-full">
+                  <h1
+                    className="display-tight text-[40px] sm:text-[68px] lg:text-[96px] font-medium tracking-tight leading-[0.96] text-ink"
+                    style={{ transform: `translateX(-${textX}vw)` }}
+                  >
+                    Practice management,
+                  </h1>
+                  <h1
+                    className="display-tight text-[40px] sm:text-[68px] lg:text-[96px] font-medium tracking-tight leading-[0.96] text-ink"
+                    style={{ transform: `translateX(${textX}vw)` }}
+                  >
+                    for the <span className="accent">Indian bar.</span>
+                  </h1>
+                </div>
+
               </div>
 
             </div>
