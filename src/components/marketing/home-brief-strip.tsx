@@ -18,10 +18,10 @@ export function HomeBriefStrip() {
               <span className="accent">an afterthought.</span>
             </h2>
             <p className="mt-6 max-w-md text-[15.5px] leading-[1.65] text-ink-2">
-              VakeelOS automates the day-to-day: causelist pulls at 06:30,
-              order summaries before you walk in, first-cut drafts from your
-              case data, UPI invoices that collect themselves. Less
-              administration. More law. Priced for advocates at every scale.
+              VakeelOS automates the day-to-day. The causelist is ready before
+              you start. Orders get summarised before you walk in. Drafts begin
+              from your case data. Invoices collect over UPI before you leave.
+              Less administration. More law. Priced for advocates at every scale.
             </p>
           </div>
 

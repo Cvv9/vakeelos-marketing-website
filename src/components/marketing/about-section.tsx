@@ -63,21 +63,20 @@ export function AboutSection() {
               </h2>
               <div className="mt-6 space-y-5 text-[15.5px] leading-[1.7] text-ink-2">
                 <p>
-                  We don&rsquo;t resell foreign tools. We don&rsquo;t bolt LegalTech
-                  vocabulary onto Western workflows. VakeelOS is built around how an advocate — independent or
-                  part of a firm at any scale — actually files a vakalatnama,
-                  tracks a High Court causelist, and bills a client over UPI.
+                  We don&rsquo;t resell foreign tools. We don&rsquo;t bolt Western
+                  LegalTech onto Indian workflows. VakeelOS automates what advocates
+                  do every day: track causelists, manage hearings, draft documents,
+                  collect fees. Every scale of practice, one operating system.
                 </p>
                 <p>
-                  The closest competitor charges 4–10× what we do. We started here
-                  because affordability is not an afterthought — it&rsquo;s the
-                  brief.
+                  The closest competitor charges 4&ndash;10&times; what we do. We
+                  started here because affordability is not an afterthought.
+                  It&rsquo;s the brief.
                 </p>
                 <p>
-                  India has 1.8 million advocates. Most of them run their practice
-                  on WhatsApp, a register, and memory. VakeelOS gives them a quiet,
-                  focused operating system — without requiring them to change how
-                  they think about their work.
+                  India has 1.8 million advocates. Most run their practice on
+                  WhatsApp, a register, and memory. VakeelOS does the
+                  administration so they can do the law.
                 </p>
               </div>
             </div>
