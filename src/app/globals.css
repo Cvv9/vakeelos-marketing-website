@@ -381,3 +381,126 @@ body {
     transition: none !important;
   }
 }
+
+/* ---- service tile mocks (forthetimes integration) ---- */
+
+.service-mock { animation: tile-rise 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both; animation-delay: 100ms; }
+
+@keyframes tile-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* CaseMock — top row pulses to indicate live update */
+.service-mock[data-state="armed"] .mock-case-row--lead {
+  animation: case-pulse 4s ease-in-out 800ms infinite;
+}
+@keyframes case-pulse {
+  0%, 100% { background-color: transparent; }
+  50%      { background-color: oklch(0.82 0.085 75 / 0.08); }
+}
+
+/* CauselistMock — fresh row slides in */
+.service-mock[data-state="armed"] .mock-causelist-row--fresh {
+  animation: causelist-slide 700ms cubic-bezier(0.2, 0.8, 0.2, 1) 600ms both;
+}
+@keyframes causelist-slide {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.service-mock[data-state="armed"] .mock-chip {
+  animation: chip-pop 500ms cubic-bezier(0.2, 0.8, 0.2, 1) 1100ms both;
+}
+@keyframes chip-pop {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* DrafterMock — typewriter line */
+.service-mock[data-state="armed"] .mock-typewriter {
+  overflow: hidden;
+  white-space: pre-wrap;
+  animation: typewriter-mask 2.4s steps(60, end) 600ms both;
+}
+@keyframes typewriter-mask {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0    0 0); }
+}
+.mock-caret {
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  margin-left: 1px;
+  background: var(--brand-deep);
+  vertical-align: -2px;
+  animation: caret-blink 0.9s steps(2, end) infinite;
+}
+@keyframes caret-blink { 50% { opacity: 0; } }
+
+/* ResearchMock — cited rows cascade */
+.service-mock[data-state="armed"] .mock-research-row {
+  opacity: 0;
+  animation: research-pop 500ms cubic-bezier(0.2, 0.8, 0.2, 1) calc(500ms + var(--i) * 220ms) both;
+}
+@keyframes research-pop {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* InvoicingMock — Sent → Paid chip flip */
+.service-mock .mock-invoice-chip {
+  color: var(--ink-3);
+  border-color: var(--rule);
+}
+.service-mock .mock-invoice-chip-dot { background: var(--ink-3); }
+.service-mock[data-state="armed"] .mock-invoice-chip {
+  animation: invoice-chip-flip 0ms 1400ms both;
+}
+@keyframes invoice-chip-flip {
+  to {
+    color: var(--brand-deep);
+    border-color: var(--brand-deep);
+    background: oklch(0.72 0.105 70 / 0.12);
+  }
+}
+.service-mock[data-state="armed"] .mock-invoice-chip-dot {
+  animation: invoice-chip-dot-flip 0ms 1400ms both;
+}
+@keyframes invoice-chip-dot-flip { to { background: var(--brand-deep); } }
+.service-mock[data-state="armed"] .mock-invoice-chip-label::after {
+  content: "Paid";
+  display: inline-block;
+}
+.service-mock[data-state="armed"] .mock-invoice-chip-label {
+  animation: invoice-chip-label-swap 0ms 1400ms both;
+}
+@keyframes invoice-chip-label-swap { to { font-size: 0; } }
+
+/* DashboardMock — items cascade */
+.service-mock[data-state="armed"] .mock-dashboard-row {
+  opacity: 0;
+  animation: dashboard-rise 500ms cubic-bezier(0.2, 0.8, 0.2, 1) calc(400ms + var(--i) * 180ms) both;
+}
+@keyframes dashboard-rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Reduced motion — show end states immediately */
+@media (prefers-reduced-motion: reduce) {
+  .service-mock,
+  .service-mock * {
+    animation: none !important;
+  }
+  .service-mock .mock-research-row,
+  .service-mock .mock-dashboard-row { opacity: 1 !important; }
+  .service-mock .mock-typewriter { clip-path: none !important; }
+  .service-mock .mock-invoice-chip {
+    color: var(--brand-deep);
+    border-color: var(--brand-deep);
+    background: oklch(0.72 0.105 70 / 0.12);
+  }
+  .service-mock .mock-invoice-chip-dot { background: var(--brand-deep); }
+  .service-mock .mock-invoice-chip-label::after { content: "Paid"; }
+  .service-mock .mock-invoice-chip-label { font-size: 0; }
+}
