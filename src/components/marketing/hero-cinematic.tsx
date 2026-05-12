@@ -106,7 +106,7 @@ export function HeroCinematic({ withIntro = false }: { withIntro?: boolean }) {
             </div>
             <div className="hero-rise mono mt-10 grid grid-cols-3 gap-6 border-t border-rule pt-6 text-[11px] uppercase tracking-[0.18em] text-ink-3" style={{ ['--delay' as string]: '0.9s' }}>
               <Stat value="1.8M" label="Indian advocates" />
-              <Stat value="High Courts" label="Live · all India" />
+              <Stat value="All Courts" label="HC · DC · Local" />
               <Stat value="06:00 IST" label="Brief on your desk" />
             </div>
           </div>
