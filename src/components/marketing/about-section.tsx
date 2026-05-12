@@ -52,9 +52,9 @@ export function AboutSection() {
       {/* ── STORY ──────────────────────────────────────────────── */}
       <section className="border-b border-rule bg-paper-2">
         <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-          <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
+          <div className="grid grid-cols-1 gap-16 lg:grid-cols-12 lg:items-start">
 
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-6">
               <p className="mono text-[11px] uppercase tracking-[0.22em] text-ink-3">
                 The brief
               </p>
@@ -81,8 +81,8 @@ export function AboutSection() {
               </div>
             </div>
 
-            <div className="lg:col-span-6 lg:col-start-7">
-              <figure className="relative aspect-[3/4] w-full overflow-hidden rounded-[3px] border border-rule">
+            <div className="lg:col-span-5 lg:col-start-8">
+              <figure className="relative aspect-[4/3] w-full overflow-hidden rounded-[3px] border border-rule">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/about-desk.png"
