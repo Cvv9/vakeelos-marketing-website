@@ -6,12 +6,14 @@ import { ServicesTiles } from "@/components/marketing/services-tiles";
 import { TestimonialRotator } from "@/components/marketing/testimonial-rotator";
 import { WorkflowSection } from "@/components/marketing/workflow-section";
 import { BookingSection } from "@/components/marketing/booking-faq";
+import { HomeBriefStrip } from "@/components/marketing/home-brief-strip";
 
 export default function HomePage() {
   return (
     <>
       <HeroCinematic />
       <ServicesTiles />
+      <HomeBriefStrip />
       <TestimonialRotator />
       <WorkflowSection />
       <BookingSection />

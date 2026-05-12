@@ -522,3 +522,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .crossfade-layer { transition: none !important; }
 }
+
+/* ---- home brief strip cold / warm filters (forthetimes integration) ---- */
+.brief-strip-cold > img { filter: grayscale(0.55) contrast(1.08) brightness(0.82); }
+.brief-strip-warm > img { filter: none; }
