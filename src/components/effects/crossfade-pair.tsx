@@ -22,7 +22,7 @@ export function CrossfadePair({
     const node = ref.current;
     if (!node || done) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setDone(true);
+      queueMicrotask(() => setDone(true));
       return;
     }
     const io = new IntersectionObserver(
