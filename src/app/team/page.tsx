@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, X } from "lucide-react";
+import { CrossfadePair } from "@/components/effects/crossfade-pair";
 import { useEffect, useState } from "react";
 
 const MEMBERS = [
@@ -25,6 +26,15 @@ const MEMBERS = [
     photo: "/varun-headshot.jpg",
   },
 ];
+
+function nameInitials(name: string): string {
+  return name
+    .split(/\s+/)
+    .map((p) => p[0] ?? "")
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+}
 
 export default function TeamPage() {
   const [active, setActive] = useState<number | null>(null);
@@ -147,32 +157,46 @@ export default function TeamPage() {
             >
               {/* Portrait */}
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[6px] border border-rule bg-paper-2 transition-colors duration-300 group-hover:border-saffron/60">
-                {m.photo ? (
-                  <Image
-                    src={m.photo}
-                    alt={m.name}
-                    fill
-                    className="object-cover object-top transition-transform duration-[1200ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:scale-[1.04]"
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                    <span className="mono text-[11px] uppercase tracking-[0.22em] text-ink-3">
-                      Photo TBD
-                    </span>
-                    <span aria-hidden className="block h-px w-8 bg-rule-strong" />
-                  </div>
-                )}
+                <CrossfadePair
+                  className="h-full w-full"
+                  duration={1200}
+                  hoverFastForward
+                  from={
+                    <div className="team-initials absolute inset-0 flex items-center justify-center bg-paper-2">
+                      <span className="display-tight text-[88px] font-medium leading-none tracking-tight text-ink-3">
+                        {nameInitials(m.name)}
+                      </span>
+                    </div>
+                  }
+                  to={
+                    m.photo ? (
+                      <Image
+                        src={m.photo}
+                        alt={m.name}
+                        fill
+                        className="object-cover object-top transition-transform duration-[1200ms] ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:scale-[1.04]"
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+                        <span className="mono text-[11px] uppercase tracking-[0.22em] text-ink-3">
+                          Photo TBD
+                        </span>
+                        <span aria-hidden className="block h-px w-8 bg-rule-strong" />
+                      </div>
+                    )
+                  }
+                />
 
                 {/* Index number */}
-                <span className="absolute top-3 left-3 mono text-[10px] uppercase tracking-[0.22em] text-paper/70 drop-shadow">
+                <span className="pointer-events-none absolute top-3 left-3 z-20 mono text-[10px] uppercase tracking-[0.22em] text-paper/70 drop-shadow">
                   0{i + 1}
                 </span>
 
                 {/* Hover overlay reveal */}
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-saffron via-saffron/95 to-saffron/0 px-4 pb-4 pt-12 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100"
+                  className="pointer-events-none absolute inset-x-0 bottom-0 z-20 translate-y-full bg-gradient-to-t from-saffron via-saffron/95 to-saffron/0 px-4 pb-4 pt-12 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100"
                 >
                   <span className="mono inline-flex items-center gap-1.5 text-[10.5px] uppercase tracking-[0.22em] text-paper">
                     View bio
