@@ -133,7 +133,7 @@ export function HeroScrollExpand() {
               </div>
 
               {/* VakeelOS wordmark — anchored top, splits left/right on scroll */}
-              <div className="absolute top-[22%] inset-x-0 flex items-center justify-center z-10">
+              <div className="absolute top-[10%] inset-x-0 flex items-center justify-center z-10">
                 <p
                   className="display-tight text-[36px] sm:text-[52px] lg:text-[68px] font-medium tracking-tight leading-none text-ink"
                   style={{ transform: `translateX(-${textX}vw)` }}
@@ -144,12 +144,13 @@ export function HeroScrollExpand() {
                   className="display-tight text-[36px] sm:text-[52px] lg:text-[68px] font-medium tracking-tight leading-none text-ink"
                   style={{ transform: `translateX(${textX}vw)` }}
                 >
-                  OS
+                  <span className="accent">OS</span>
                 </p>
               </div>
 
               {/* Hint + title — anchored bottom, each line flies apart on scroll */}
-              <div className="absolute bottom-[4%] inset-x-0 flex flex-col items-center gap-3 z-10">
+              {/* bottom values match the sticky nav height per breakpoint (136/168/200px) + buffer */}
+              <div className="absolute bottom-36 md:bottom-44 lg:bottom-52 inset-x-0 flex flex-col items-center gap-3 z-10">
 
                 {/* Hint line */}
                 <div className="flex items-center gap-8">
