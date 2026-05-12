@@ -18,10 +18,10 @@ export function HomeBriefStrip() {
               <span className="accent">an afterthought.</span>
             </h2>
             <p className="mt-6 max-w-md text-[15.5px] leading-[1.65] text-ink-2">
-              We don&rsquo;t resell foreign tools. VakeelOS is built around how
-              an advocate — independent or at scale — actually files a
-              vakalatnama, tracks a High Court causelist, and bills a client
-              over UPI. Built for India, hosted in India.
+              VakeelOS automates the day-to-day: causelist pulls at 06:30,
+              order summaries before you walk in, first-cut drafts from your
+              case data, UPI invoices that collect themselves. Less
+              administration. More law. Priced for advocates at every scale.
             </p>
           </div>
 
