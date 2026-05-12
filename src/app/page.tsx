@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { HeroCinematic } from "@/components/marketing/hero-cinematic";
+import { HeroScrollExpand } from "@/components/marketing/hero-scroll-expand";
 import { ServicesTiles } from "@/components/marketing/services-tiles";
 import { TestimonialRotator } from "@/components/marketing/testimonial-rotator";
 import { WorkflowSection } from "@/components/marketing/workflow-section";
@@ -11,7 +11,7 @@ import { HomeBriefStrip } from "@/components/marketing/home-brief-strip";
 export default function HomePage() {
   return (
     <>
-      <HeroCinematic withIntro />
+      <HeroScrollExpand />
       <ServicesTiles />
       <HomeBriefStrip />
       <TestimonialRotator />
