@@ -1,4 +1,5 @@
 import { CircleDot } from "lucide-react";
+import { CrossfadePair } from "@/components/effects/crossfade-pair";
 
 const PILLARS = [
   {
@@ -83,11 +84,27 @@ export function AboutSection() {
 
             <div className="lg:col-span-5 lg:col-start-8">
               <figure className="relative aspect-[4/3] w-full overflow-hidden rounded-[3px] border border-rule">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/about-desk.png"
-                  alt="A lawyer's desk — lamp, documents, pen"
-                  className="absolute inset-0 z-0 h-full w-full object-cover object-center"
+                <CrossfadePair
+                  className="absolute inset-0"
+                  duration={1600}
+                  from={
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src="/about-desk.png"
+                      alt=""
+                      aria-hidden
+                      className="h-full w-full object-cover object-center"
+                      style={{ filter: "grayscale(0.65) contrast(1.1) brightness(0.8)" }}
+                    />
+                  }
+                  to={
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src="/about-desk.png"
+                      alt="A lawyer's desk — lamp, documents, pen"
+                      className="h-full w-full object-cover object-center"
+                    />
+                  }
                 />
                 <div className="film-grain" aria-hidden />
                 <figcaption className="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-5 pt-4">

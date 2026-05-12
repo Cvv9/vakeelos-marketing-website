@@ -2,7 +2,9 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroScrollExpand } from "@/components/marketing/hero-scroll-expand";
+import { HeroWordmarkIntro } from "@/components/marketing/hero-wordmark-intro";
 import { ServicesTiles } from "@/components/marketing/services-tiles";
+import { AboutSection } from "@/components/marketing/about-section";
 import { TestimonialRotator } from "@/components/marketing/testimonial-rotator";
 import { WorkflowSection } from "@/components/marketing/workflow-section";
 import { BookingSection } from "@/components/marketing/booking-faq";
@@ -11,9 +13,11 @@ import { HomeBriefStrip } from "@/components/marketing/home-brief-strip";
 export default function HomePage() {
   return (
     <>
+      <HeroWordmarkIntro />
       <HeroScrollExpand />
       <ServicesTiles />
       <HomeBriefStrip />
+      <AboutSection />
       <TestimonialRotator />
       <WorkflowSection />
       <BookingSection />
