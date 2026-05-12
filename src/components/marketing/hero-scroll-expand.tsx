@@ -102,9 +102,9 @@ export function HeroScrollExpand() {
             {/* Full-viewport scroll-expand stage */}
             <div className="relative w-full h-[100dvh]">
 
-              {/* Expanding hero video — absolutely centered */}
+              {/* Expanding hero video — slightly above center to stay close to wordmark */}
               <div
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[3px] overflow-hidden"
+                className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[3px] overflow-hidden"
                 style={{
                   width: `${mediaW}px`,
                   height: `${mediaH}px`,
@@ -133,15 +133,15 @@ export function HeroScrollExpand() {
               </div>
 
               {/* VakeelOS wordmark — anchored top, splits left/right on scroll */}
-              <div className="absolute top-[10%] inset-x-0 flex items-center justify-center z-10">
+              <div className="absolute top-[12%] inset-x-0 flex items-center justify-center z-10">
                 <p
-                  className="display-tight text-[36px] sm:text-[52px] lg:text-[68px] font-medium tracking-tight leading-none text-ink"
+                  className="display-tight text-[64px] sm:text-[96px] lg:text-[130px] font-medium tracking-tight leading-none text-ink"
                   style={{ transform: `translateX(-${textX}vw)` }}
                 >
                   Vakeel
                 </p>
                 <p
-                  className="display-tight text-[36px] sm:text-[52px] lg:text-[68px] font-medium tracking-tight leading-none text-ink"
+                  className="display-tight text-[64px] sm:text-[96px] lg:text-[130px] font-medium tracking-tight leading-none text-ink"
                   style={{ transform: `translateX(${textX}vw)` }}
                 >
                   <span className="accent">OS</span>
