@@ -596,7 +596,9 @@ section[data-paper] > :not([data-no-lift]) { position: relative; z-index: 1; }
   to { opacity: 0; transform: translateY(-8px); }
 }
 
-.hero-intro-wordmark > span {
+/* :not(.accent) excludes the accent wrapper; .accent > span catches "Indian bar" letter spans */
+.hero-intro-wordmark > span:not(.accent),
+.hero-intro-wordmark .accent > span {
   display: inline-block;
   opacity: 0;
   transform: translateY(0.4em);
