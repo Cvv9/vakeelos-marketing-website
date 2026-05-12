@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { CalendarClock, FileSignature, Gavel, Receipt } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { WorkflowSubsteps } from "@/components/marketing/workflow-substeps";
 
 const STEPS: {
   num: string;
@@ -138,7 +139,8 @@ export function WorkflowSection() {
               <p className="mt-6 max-w-xl text-[16px] leading-[1.6] text-ink-2">
                 {step.body}
               </p>
-              <div className="mt-10 flex items-center gap-3 text-ink-3">
+              <WorkflowSubsteps stepNum={step.num} />
+              <div className="mt-8 flex items-center gap-3 text-ink-3">
                 <StepIcon className="h-5 w-5 text-brand-deep" />
                 <span className="mono text-[11px] uppercase tracking-[0.22em]">
                   auto · 0&nbsp;clicks
