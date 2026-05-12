@@ -4,8 +4,9 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Play, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { HeroWordmarkIntro } from "@/components/marketing/hero-wordmark-intro";
 
-export function HeroCinematic() {
+export function HeroCinematic({ withIntro = false }: { withIntro?: boolean }) {
   const wrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -115,6 +116,7 @@ export function HeroCinematic() {
           </div>
         </div>
       </div>
+      {withIntro ? <HeroWordmarkIntro /> : null}
     </section>
   );
 }

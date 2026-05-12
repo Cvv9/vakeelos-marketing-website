@@ -11,7 +11,7 @@ import { HomeBriefStrip } from "@/components/marketing/home-brief-strip";
 export default function HomePage() {
   return (
     <>
-      <HeroCinematic />
+      <HeroCinematic withIntro />
       <ServicesTiles />
       <HomeBriefStrip />
       <TestimonialRotator />
