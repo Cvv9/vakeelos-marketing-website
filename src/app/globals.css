@@ -564,4 +564,5 @@ section[data-paper="deep"]::after {
     transparent 70%
   );
 }
+/* Lifts direct children above ::after (z-index:0). Direct children must not be position:absolute — wrap them in a positioned container first. */
 section[data-paper] > * { position: relative; z-index: 1; }
