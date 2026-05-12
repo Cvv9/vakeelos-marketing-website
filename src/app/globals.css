@@ -426,7 +426,7 @@ body {
   from { clip-path: inset(0 100% 0 0); }
   to   { clip-path: inset(0 0    0 0); }
 }
-.mock-caret {
+.service-mock .mock-caret {
   display: inline-block;
   width: 1px;
   height: 1em;
