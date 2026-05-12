@@ -162,7 +162,7 @@ export default function TeamPage() {
                   duration={1200}
                   hoverFastForward
                   from={
-                    <div className="team-initials absolute inset-0 flex items-center justify-center bg-paper-2">
+                    <div className="team-initials flex h-full w-full items-center justify-center bg-paper-2">
                       <span className="display-tight text-[88px] font-medium leading-none tracking-tight text-ink-3">
                         {nameInitials(m.name)}
                       </span>
