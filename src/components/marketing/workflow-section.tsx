@@ -16,7 +16,7 @@ const STEPS: {
     num: "01",
     title: "Sync",
     meta: "Tuesday · 06:30 IST",
-    body: "Causelist auto-pulls APHC + TSHC. Tick the rows you actually argue today. Everything else stays in the drawer.",
+    body: "Causelist auto-pulls your High Court. Tick the rows you actually argue today. Everything else stays in the drawer.",
     Icon: CalendarClock,
   },
   {

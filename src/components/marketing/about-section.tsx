@@ -4,7 +4,7 @@ const PILLARS = [
   {
     kicker: "Made in",
     title: "India",
-    copy: "Drafted around real Indian causelists. Tested on APHC and TSHC. Built by engineers who briefed before they shipped.",
+    copy: "Drafted around real Indian causelists. Tested on live High Court dockets. Built by engineers who briefed before they shipped.",
   },
   {
     kicker: "Hosted in",
@@ -65,8 +65,8 @@ export function AboutSection() {
                 <p>
                   We don&rsquo;t resell foreign tools. We don&rsquo;t bolt LegalTech
                   vocabulary onto Western workflows. VakeelOS is built around how a
-                  solo or small firm actually files a vakalatnama, tracks an APHC
-                  causelist, and bills a client over UPI.
+                  solo or small firm actually files a vakalatnama, tracks a
+                  High Court causelist, and bills a client over UPI.
                 </p>
                 <p>
                   The closest competitor charges 4–10× what we do. We started here

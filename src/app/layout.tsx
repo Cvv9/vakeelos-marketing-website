@@ -5,6 +5,7 @@ import "./globals.css";
 import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
 import { PaperTexture } from "@/components/effects/paper-texture";
+import { ScrollRevealProvider } from "@/components/effects/scroll-reveal";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -81,6 +82,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-paper text-ink">
         <PaperTexture />
+        <ScrollRevealProvider />
         <Nav />
         <main className="relative z-[2] flex-1">{children}</main>
         <Footer />

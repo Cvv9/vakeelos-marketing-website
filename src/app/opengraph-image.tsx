@@ -113,7 +113,7 @@ export default function OpenGraphImage() {
             }}
           >
             Cases, causelists, drafting, and UPI billing — built around CNR numbers,
-            APHC/TSHC pulls, and the Indian bar.
+            High Court causelist pulls, and the Indian bar.
           </div>
         </div>
 

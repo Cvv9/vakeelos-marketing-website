@@ -2,10 +2,12 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "Next.js dev",
+      "name": "Next.js dev (worktree)",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["dev"],
-      "port": 3000
+      "port": 3000,
+      "autoPort": false,
+      "cwd": "/Users/cvv_sylar/Documents/Projects/VakeelOS_Marketing_JosephLaw/.worktrees/forthetimes-integration"
     }
   ]
 }

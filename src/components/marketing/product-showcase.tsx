@@ -34,7 +34,7 @@ const SCENES: Scene[] = [
     title: "11,234 entries hit the high court portal. Three of them are yours.",
     body: (
       <>
-        <Brand /> pulls APHC and TSHC every morning, then waits for you to tick the rows that matter. Untracked rows live in the inbox, never in your case manager.
+        <Brand /> pulls every integrated High Court every morning, then waits for you to tick the rows that matter. Untracked rows live in the inbox, never in your case manager.
       </>
     ),
   },

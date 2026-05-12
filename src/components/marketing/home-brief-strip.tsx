@@ -19,9 +19,9 @@ export function HomeBriefStrip() {
             </h2>
             <p className="mt-6 max-w-md text-[15.5px] leading-[1.65] text-ink-2">
               We don&rsquo;t resell foreign tools. VakeelOS is built around how
-              a solo or small firm actually files a vakalatnama, tracks an
-              APHC causelist, and bills a client over UPI. Hosted in India,
-              priced for India.
+              a solo or small firm actually files a vakalatnama, tracks a
+              High Court causelist, and bills a client over UPI. Built for
+              India, hosted in India.
             </p>
           </div>
 

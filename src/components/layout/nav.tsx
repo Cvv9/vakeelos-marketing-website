@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { TransitionLink } from "@/components/effects/transition-link";
 
 const LEFT_LINKS = [
   { href: "/#services", label: "Services" },
@@ -58,13 +59,13 @@ export function Nav() {
   return (
     <>
       {/* Floating waitlist pill — fixed top-right, always visible */}
-      <Link
+      <TransitionLink
         href="/waitlist"
         className="group mono fixed right-4 top-4 z-[60] inline-flex items-center gap-2 rounded-full border border-ink/20 bg-paper px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-ink shadow-[0_2px_12px_rgba(0,0,0,0.15)] [text-rendering:optimizeLegibility] [-webkit-font-smoothing:antialiased] transition-all duration-200 hover:border-ink/40 hover:shadow-[0_4px_20px_rgba(0,0,0,0.2)] sm:right-5 sm:top-5 sm:px-5 sm:text-[11px] lg:right-8 lg:top-5"
       >
         Join the waitlist
         <ArrowUpRight className="h-3 w-3 shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-      </Link>
+      </TransitionLink>
 
       {/* Sticky main nav — naked at top, glassmorphic pill on scroll.
           Outer slot height is locked so the pill can shrink without
@@ -97,7 +98,7 @@ export function Nav() {
                     className={`flex items-center ${stuck ? "gap-5 lg:gap-6" : "gap-7 lg:gap-9"}`}
                   >
                     {i > 0 && <span aria-hidden className="block h-3 w-px bg-rule-strong opacity-50" />}
-                    <Link
+                    <TransitionLink
                       href={l.href}
                       className={`text-[15px] tracking-wide transition-colors ${
                         isActive(l.href)
@@ -106,13 +107,13 @@ export function Nav() {
                       }`}
                     >
                       {l.label}
-                    </Link>
+                    </TransitionLink>
                   </span>
                 ))}
               </nav>
 
               {/* Center V logo — generous at rest, still readable in the pill */}
-              <Link
+              <TransitionLink
                 href="/"
                 className="group flex items-center justify-self-center transition-all duration-300 ease-out"
                 aria-label="VakeelOS — home"
@@ -127,7 +128,7 @@ export function Nav() {
                     stuck ? "h-9 w-9 lg:h-10 lg:w-10" : "h-28 w-28 lg:h-32 lg:w-32"
                   }`}
                 />
-              </Link>
+              </TransitionLink>
 
               {/* Right links */}
               <nav
@@ -141,7 +142,7 @@ export function Nav() {
                     className={`flex items-center ${stuck ? "gap-5 lg:gap-6" : "gap-7 lg:gap-9"}`}
                   >
                     {i > 0 && <span aria-hidden className="block h-3 w-px bg-rule-strong opacity-50" />}
-                    <Link
+                    <TransitionLink
                       href={l.href}
                       className={`text-[15px] tracking-wide transition-colors ${
                         isActive(l.href)
@@ -150,14 +151,14 @@ export function Nav() {
                       }`}
                     >
                       {l.label}
-                    </Link>
+                    </TransitionLink>
                   </span>
                 ))}
               </nav>
             </div>
 
             {/* Mobile fallback — centred V logo only */}
-            <Link
+            <TransitionLink
               href="/"
               className="group mx-auto flex w-fit items-center md:hidden"
               aria-label="VakeelOS — home"
@@ -172,7 +173,7 @@ export function Nav() {
                   stuck ? "h-9 w-9" : "h-20 w-20"
                 }`}
               />
-            </Link>
+            </TransitionLink>
           </div>
         </div>
       </header>

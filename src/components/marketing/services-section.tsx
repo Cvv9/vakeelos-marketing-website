@@ -11,7 +11,7 @@ const SERVICES: { num: string; title: string; blurb: string; href: string }[] = 
   {
     num: "02",
     title: "Causelist Sync",
-    blurb: "APHC + TSHC pulled fresh at 06:30 IST. Tick the rows that matter, the rest stay quiet.",
+    blurb: "Your High Court causelist pulled fresh at 06:30 IST. Tick the rows that matter, the rest stay quiet.",
     href: "/features#causelist",
   },
   {
@@ -103,8 +103,8 @@ export function ServicesSection() {
 
 function ServiceMarquee() {
   const wordmarks = [
-    "APHC",
-    "TSHC",
+    "High Courts",
+    "District Courts",
     "Indian Kanoon",
     "Razorpay",
     "WhatsApp",

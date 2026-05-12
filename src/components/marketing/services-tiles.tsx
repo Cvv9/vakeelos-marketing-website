@@ -29,7 +29,7 @@ const SERVICES: {
     num: "02",
     title: "Causelist Sync",
     blurb:
-      "APHC + TSHC pulled fresh at 06:30 IST. Tick the rows that matter, the rest stay quiet.",
+      "Your High Court causelist pulled fresh at 06:30 IST. Tick the rows that matter, the rest stay quiet.",
     href: "/features#causelist",
     kind: "causelist",
   },

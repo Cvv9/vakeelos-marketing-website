@@ -80,7 +80,7 @@ const COMPARE: Row[] = [
   },
   {
     group: "Cases",
-    label: "Causelist sync (APHC, TSHC)",
+    label: "Causelist sync (High Courts, expanding)",
     values: [false, true, true, true],
   },
   {
@@ -192,7 +192,7 @@ export default function PricingPage() {
               <div className="mono text-[11px] uppercase tracking-[0.22em] text-ink-3">
                 Pricing · INR-native, no GST surprises
               </div>
-              <h1 className="display-tight mt-7 text-[44px] font-semibold leading-[0.98] md:text-[68px]">
+              <h1 className="reveal display-tight mt-7 text-[44px] font-semibold leading-[0.98] md:text-[68px]">
                 Priced for the bar.{" "}
                 <span className="accent text-saffron-deep">Not for an MNC.</span>
               </h1>
@@ -300,7 +300,7 @@ export default function PricingPage() {
               <Badge variant="ink" className="mb-6">
                 Compare line by line
               </Badge>
-              <h2 className="display-tight text-[32px] font-semibold leading-[1.05] md:text-[40px]">
+              <h2 className="reveal display-tight text-[32px] font-semibold leading-[1.05] md:text-[40px]">
                 What&rsquo;s in <span className="accent text-saffron-deep">each plan.</span>
               </h2>
             </div>
@@ -375,7 +375,7 @@ export default function PricingPage() {
             <Badge variant="saffron" className="mb-6">
               Frequently asked
             </Badge>
-            <h2 className="display-tight text-[32px] font-semibold leading-[1.05] md:text-[40px]">
+            <h2 className="reveal display-tight text-[32px] font-semibold leading-[1.05] md:text-[40px]">
               Six questions, <span className="accent text-saffron-deep">honest answers.</span>
             </h2>
             <p className="mt-5 max-w-sm text-[14px] leading-relaxed text-ink-2">
@@ -414,7 +414,7 @@ export default function PricingPage() {
         <div className="mx-auto max-w-7xl px-6 py-20 md:py-28 lg:px-10">
           <div className="grid grid-cols-12 items-end gap-10">
             <div className="col-span-12 md:col-span-8">
-              <h2 className="display-tight text-[36px] font-semibold leading-[1.02] md:text-[52px]">
+              <h2 className="reveal display-tight text-[36px] font-semibold leading-[1.02] md:text-[52px]">
                 Try it for a hearing cycle.{" "}
                 <span className="accent text-saffron">No card, no commitment.</span>
               </h2>

@@ -45,7 +45,7 @@ const GROUPS: {
         slug: "causelist",
         title: "Causelist Sync",
         blurb:
-          "Daily APHC and TSHC pulls into a clean inbox. You tick the rows that are yours; only those become tracked cases.",
+          "Daily causelist pulls from every integrated High Court into a clean inbox. You tick the rows that are yours; only those become tracked cases.",
         bullets: [
           "Selective tracking — your case list never drowns in stranger names",
           "11,200+ entries pulled per month, with quiet drift detection in the background",
@@ -199,7 +199,7 @@ export default function FeaturesPage() {
               <div className="mono text-[11px] uppercase tracking-[0.22em] text-ink-3">
                 Features · the full module list
               </div>
-              <h1 className="display-tight mt-7 text-[44px] font-semibold leading-[0.98] md:text-[68px]">
+              <h1 className="reveal display-tight mt-7 text-[44px] font-semibold leading-[0.98] md:text-[68px]">
                 Nine modules.{" "}
                 <span className="accent text-saffron-deep">One operating system.</span>
               </h1>
@@ -227,17 +227,17 @@ export default function FeaturesPage() {
                 <div className="mono text-[12px] font-semibold uppercase tracking-[0.2em] text-ink-3">
                   {g.kicker}
                 </div>
-                <h2 className="display-tight mt-4 text-[28px] font-semibold leading-[1.05] md:text-[36px]">
+                <h2 className="reveal display-tight mt-4 text-[28px] font-semibold leading-[1.05] md:text-[36px]">
                   {g.group}
                 </h2>
-                <p className="mt-5 max-w-sm text-[14.5px] leading-relaxed text-ink-2">
+                <p className="reveal mt-5 max-w-sm text-[14.5px] leading-relaxed text-ink-2">
                   {g.intro}
                 </p>
               </div>
               <div className="col-span-12 md:col-span-8">
                 <div className="space-y-px bg-rule">
                   {g.modules.map((m) => (
-                    <div key={m.no} id={m.slug} className="scroll-mt-28 bg-paper p-7 md:p-9">
+                    <div key={m.no} id={m.slug} className="reveal scroll-mt-28 bg-paper p-7 md:p-9">
                       <div className="grid grid-cols-12 items-baseline gap-4">
                         <div className="mono col-span-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-ink-3 md:col-span-1">
                           {m.no}
@@ -275,17 +275,17 @@ export default function FeaturesPage() {
           <div className="grid grid-cols-12 items-end gap-10">
             <div className="col-span-12 md:col-span-8">
               <h2 className="display-tight text-[36px] font-semibold leading-[1.02] md:text-[52px]">
-                Pricing is the <span className="accent text-saffron">simple part.</span>
+                Early access is <span className="accent text-saffron">invite only.</span>
               </h2>
               <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-paper/85">
-                Solo at ₹999. Firm at ₹2,499 per seat. Free tier for your first ten cases. Bar
-                Council verification on us.
+                Join the waitlist and we&rsquo;ll reach out when your spot opens. Bar Council
+                verification on us.
               </p>
             </div>
             <div className="col-span-12 md:col-span-4 md:text-right">
-              <Link href="/pricing">
+              <Link href="/waitlist">
                 <Button variant="saffron" size="lg" className="gap-2">
-                  See pricing <ArrowRight className="h-4 w-4" />
+                  Join the waitlist <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
             </div>

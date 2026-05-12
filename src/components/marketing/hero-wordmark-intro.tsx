@@ -7,7 +7,7 @@ const SESSION_KEY = "vakeelos.intro.seen";
 export function HeroWordmarkIntro() {
   const [visible, setVisible] = useState(false);
   const [dismissing, setDismissing] = useState(false);
-  const exitTimerRef = useRef<ReturnType<typeof window.setTimeout> | null>(null);
+  const exitTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
