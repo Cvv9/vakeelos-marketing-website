@@ -31,11 +31,17 @@ export function Nav() {
   };
 
   useEffect(() => {
+    // On inner pages, always show the compact pill — no scroll needed.
+    // On the homepage, shrink into the pill once the user scrolls past the hero.
+    if (pathname !== "/") {
+      setStuck(true);
+      return;
+    }
     const onScroll = () => setStuck(window.scrollY > 4);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     if (pathname !== "/") return;
