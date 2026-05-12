@@ -39,6 +39,7 @@ export function ServiceMock({ kind }: { kind: Kind }) {
   return (
     <div
       ref={wrapRef}
+      aria-hidden="true"
       data-state={armed ? "armed" : "idle"}
       className="service-mock relative w-full aspect-[4/3] overflow-hidden rounded-[3px] border border-rule bg-paper-2"
     >
