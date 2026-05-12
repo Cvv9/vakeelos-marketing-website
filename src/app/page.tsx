@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroCinematic } from "@/components/marketing/hero-cinematic";
-import { ServicesSection } from "@/components/marketing/services-section";
+import { ServicesTiles } from "@/components/marketing/services-tiles";
 import { TestimonialRotator } from "@/components/marketing/testimonial-rotator";
 import { WorkflowSection } from "@/components/marketing/workflow-section";
 import { BookingSection } from "@/components/marketing/booking-faq";
@@ -11,7 +11,7 @@ export default function HomePage() {
   return (
     <>
       <HeroCinematic />
-      <ServicesSection />
+      <ServicesTiles />
       <TestimonialRotator />
       <WorkflowSection />
       <BookingSection />
