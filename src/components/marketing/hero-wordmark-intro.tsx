@@ -12,7 +12,9 @@ export function HeroWordmarkIntro() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (window.sessionStorage.getItem(SESSION_KEY) === "1") return;
+    const nav = window.performance?.getEntriesByType?.('navigation')?.[0] as PerformanceNavigationTiming | undefined;
+    const isReload = nav?.type === 'reload';
+    if (!isReload && window.sessionStorage.getItem(SESSION_KEY) === "1") return;
 
     queueMicrotask(() => setVisible(true));
     window.sessionStorage.setItem(SESSION_KEY, "1");
@@ -57,14 +59,14 @@ export function HeroWordmarkIntro() {
         <h2 className="display-tight hero-intro-wordmark text-[44px] font-medium leading-[0.92] tracking-tight text-ink sm:text-[88px] lg:text-[120px]">
           {"For the".split("").map((c, i) => (
             <span key={`a-${i}`} style={{ ['--i' as string]: i }}>
-              {c === " " ? " " : c}
+              {c === " " ? " " : c}
             </span>
           ))}
           <br />
           <span className="accent">
             {"Indian bar".split("").map((c, i) => (
               <span key={`b-${i}`} style={{ ['--i' as string]: i + 8 }}>
-                {c === " " ? " " : c}
+                {c === " " ? " " : c}
               </span>
             ))}
           </span>
