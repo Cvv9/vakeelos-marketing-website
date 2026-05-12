@@ -19,7 +19,7 @@ const PILLARS = [
 ];
 
 const DIFFERENTIATORS = [
-  { label: "Solo + small firms", copy: "Built around the independent advocate and the two-partner chamber, not the BigLaw firm." },
+  { label: "Solo to enterprise", copy: "Built for the independent advocate, the two-partner chamber, and the large litigation department alike — one court-native system at every scale." },
   { label: "INR-native billing", copy: "No USD pricing converted badly. Net invoices in rupees and paise, UPI-ready out of the box." },
   { label: "Bar Council verified", copy: "Enrolment verified at onboarding. Not a self-declared checkbox — an actual verification step." },
   { label: "DPDPA-ready logging", copy: "Audit logs and data residency aligned to India's Digital Personal Data Protection Act 2023." },
@@ -64,9 +64,9 @@ export function AboutSection() {
               <div className="mt-6 space-y-5 text-[15.5px] leading-[1.7] text-ink-2">
                 <p>
                   We don&rsquo;t resell foreign tools. We don&rsquo;t bolt LegalTech
-                  vocabulary onto Western workflows. VakeelOS is built around how a
-                  solo or small firm actually files a vakalatnama, tracks a
-                  High Court causelist, and bills a client over UPI.
+                  vocabulary onto Western workflows. VakeelOS is built around how an advocate — independent or
+                  part of a firm at any scale — actually files a vakalatnama,
+                  tracks a High Court causelist, and bills a client over UPI.
                 </p>
                 <p>
                   The closest competitor charges 4–10× what we do. We started here

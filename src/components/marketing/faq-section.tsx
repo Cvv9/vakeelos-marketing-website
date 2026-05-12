@@ -54,8 +54,7 @@ export function FaqSection() {
         </h1>
         <p className="reveal mt-6 max-w-xl text-[16px] leading-[1.6] text-ink-3">
           Plain answers about onboarding, eCourts reliability, language support,
-          data residency, and net invoicing — written for solo and small-firm
-          advocates.
+          data residency, and net invoicing — written for advocates at every scale.
         </p>
 
         <ul className="mt-16 divide-y divide-rule border-y border-rule">
