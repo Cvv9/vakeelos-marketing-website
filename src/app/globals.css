@@ -504,3 +504,21 @@ body {
   .service-mock .mock-invoice-chip-label::after { content: "Paid"; }
   .service-mock .mock-invoice-chip-label { font-size: 0; }
 }
+
+/* ---- crossfade pair (forthetimes integration) ---- */
+
+.crossfade-pair { isolation: isolate; }
+
+.crossfade-layer {
+  transition: opacity var(--crossfade-duration, 1600ms) cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.crossfade-pair .crossfade-layer--from { opacity: 1; }
+.crossfade-pair .crossfade-layer--to { opacity: 0; }
+
+.crossfade-pair[data-done="true"] .crossfade-layer--from { opacity: 0; }
+.crossfade-pair[data-done="true"] .crossfade-layer--to { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .crossfade-layer { transition: none !important; }
+}
