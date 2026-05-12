@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const SESSION_KEY = "vakeelos.intro.seen";
 
 export function HeroWordmarkIntro() {
   const [visible, setVisible] = useState(false);
   const [dismissing, setDismissing] = useState(false);
+  const exitTimerRef = useRef<ReturnType<typeof window.setTimeout> | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -27,7 +28,7 @@ export function HeroWordmarkIntro() {
 
     function dismiss() {
       setDismissing(true);
-      window.setTimeout(() => setVisible(false), 700);
+      exitTimerRef.current = window.setTimeout(() => setVisible(false), 700);
       window.removeEventListener("pointerdown", onAny);
       window.removeEventListener("keydown", onKey);
       window.clearTimeout(timer);
@@ -37,6 +38,7 @@ export function HeroWordmarkIntro() {
       window.removeEventListener("pointerdown", onAny);
       window.removeEventListener("keydown", onKey);
       window.clearTimeout(timer);
+      if (exitTimerRef.current) window.clearTimeout(exitTimerRef.current);
     };
   }, []);
 
@@ -44,9 +46,7 @@ export function HeroWordmarkIntro() {
 
   return (
     <div
-      role="dialog"
       aria-label="VakeelOS intro"
-      aria-hidden={dismissing}
       data-dismissing={dismissing}
       className="hero-intro fixed inset-0 z-[60] flex items-center justify-center bg-paper"
     >
