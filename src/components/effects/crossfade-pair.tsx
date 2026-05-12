@@ -16,13 +16,15 @@ export function CrossfadePair({
   hoverFastForward?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [done, setDone] = useState(
-    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
     const node = ref.current;
     if (!node || done) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      queueMicrotask(() => setDone(true));
+      return;
+    }
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
@@ -42,7 +44,7 @@ export function CrossfadePair({
   return (
     <div
       ref={ref}
-      data-done={done}
+      data-done={done ? "true" : "false"}
       className={`crossfade-pair relative ${className ?? ""}`}
       onMouseEnter={hoverFastForward ? () => setDone(true) : undefined}
       onFocus={hoverFastForward ? () => setDone(true) : undefined}
