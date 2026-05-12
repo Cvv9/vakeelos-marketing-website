@@ -25,7 +25,7 @@ const TESTIMONIALS: { name: string; role: string; firm: string; photo: string | 
   {
     name: "Adv. Aarav Mehta",
     role: "Solo Practitioner",
-    firm: "Mehta Chambers · Mumbai",
+    firm: "Mehta Chambers · Vijayawada",
     photo: "/advocate-male-1.png",
     quote:
       "Drafting a Section 138 notice used to take an evening. With the AI Drafter it’s a coffee. The numbers — both the case numbers and the invoices — finally tally on the first try.",
@@ -33,7 +33,7 @@ const TESTIMONIALS: { name: string; role: string; firm: string; photo: string | 
   {
     name: "Adv. Rohan Khanna",
     role: "Senior Partner",
-    firm: "Iyer & Khanna LLP · Bengaluru",
+    firm: "Iyer & Khanna LLP · Visakhapatnam",
     photo: "/advocate-male-2.png",
     quote: (
       <>
