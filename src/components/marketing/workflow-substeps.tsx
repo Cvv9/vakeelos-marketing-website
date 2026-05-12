@@ -25,7 +25,6 @@ export function WorkflowSubsteps({ stepNum }: { stepNum: string }) {
   const rows = SUBSTEPS[stepNum] ?? [];
   return (
     <ol
-      key={stepNum}
       className="workflow-substeps mt-8 flex flex-col gap-2 border-t border-rule pt-6"
       data-step={stepNum}
     >
@@ -36,7 +35,7 @@ export function WorkflowSubsteps({ stepNum }: { stepNum: string }) {
           style={{ ['--i' as string]: i }}
         >
           <div className="flex items-center gap-4">
-            <span className="mono text-[10.5px] uppercase tracking-[0.22em] text-ink-3">
+            <span aria-hidden="true" className="mono text-[10.5px] uppercase tracking-[0.22em] text-ink-3">
               {String(i + 1).padStart(2, "0")}
             </span>
             <span className="text-[14px] tracking-tight text-ink-2">
