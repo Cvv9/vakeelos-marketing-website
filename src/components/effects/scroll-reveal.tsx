@@ -8,6 +8,8 @@ export function ScrollRevealProvider() {
 
   useEffect(() => {
     // Small delay lets the new page DOM settle before we query it
+    // 600ms > page-transition enter duration (550ms) — ensures reveals
+    // start only after the page is fully opaque, not mid-fade.
     const timer = window.setTimeout(() => {
       const els = document.querySelectorAll<Element>(".reveal:not(.in-view)");
       if (!els.length) return;
@@ -26,7 +28,7 @@ export function ScrollRevealProvider() {
 
       els.forEach((el) => obs.observe(el));
       return () => obs.disconnect();
-    }, 80);
+    }, 600);
 
     return () => window.clearTimeout(timer);
   }, [pathname]);
