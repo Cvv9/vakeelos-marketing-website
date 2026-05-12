@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
+import { PaperTexture } from "@/components/effects/paper-texture";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -79,8 +80,9 @@ export default function RootLayout({
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper text-ink">
+        <PaperTexture />
         <Nav />
-        <main className="flex-1">{children}</main>
+        <main className="relative z-[2] flex-1">{children}</main>
         <Footer />
         <Analytics />
       </body>
