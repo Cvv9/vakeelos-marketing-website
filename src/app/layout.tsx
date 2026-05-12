@@ -6,6 +6,7 @@ import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
 import { PaperTexture } from "@/components/effects/paper-texture";
 import { ScrollRevealProvider } from "@/components/effects/scroll-reveal";
+import { PageTransition } from "@/components/effects/page-transition";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -84,7 +85,9 @@ export default function RootLayout({
         <PaperTexture />
         <ScrollRevealProvider />
         <Nav />
-        <main className="relative z-[2] flex-1">{children}</main>
+        <main className="relative z-[2] flex-1">
+          <PageTransition>{children}</PageTransition>
+        </main>
         <Footer />
         <Analytics />
       </body>

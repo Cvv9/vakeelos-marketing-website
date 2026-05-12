@@ -29,15 +29,7 @@ export function TransitionLink({ href, onClick, children, ...props }: Props) {
 
       e.preventDefault();
       onClick?.(e);
-
-      if (typeof document.startViewTransition !== "function") {
-        router.push(url);
-        return;
-      }
-
-      document.startViewTransition(() => {
-        router.push(url);
-      });
+      router.push(url);
     },
     [href, onClick, props, router]
   );
