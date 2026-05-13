@@ -12,6 +12,9 @@ export function HeroWordmarkIntro() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Never show the intro when the URL targets a specific section (hash present).
+    // This covers: refresh on /#workflow, navigate from /team → /#workflow, etc.
+    if (window.location.hash) return;
     const nav = window.performance?.getEntriesByType?.('navigation')?.[0] as PerformanceNavigationTiming | undefined;
     const isReload = nav?.type === 'reload';
     if (!isReload && window.sessionStorage.getItem(SESSION_KEY) === "1") return;

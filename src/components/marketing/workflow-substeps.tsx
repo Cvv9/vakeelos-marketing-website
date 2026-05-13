@@ -1,23 +1,23 @@
 const SUBSTEPS: Record<string, { verb: string; mono: string }[]> = {
   "01": [
-    { verb: "Court site polled", mono: "06:30" },
-    { verb: "Causelist diffed", mono: "06:31" },
-    { verb: "Conflicts flagged", mono: "06:32" },
+    { verb: "High Court & district courts polled", mono: "06:30" },
+    { verb: "Causelist diffed, conflicts flagged", mono: "06:31" },
+    { verb: "Your rows ticked, hearings scheduled", mono: "06:32" },
   ],
   "02": [
-    { verb: "Bundle compiled", mono: "09:10" },
-    { verb: "Page anchors set", mono: "09:12" },
-    { verb: "Read by counsel", mono: "09:14" },
+    { verb: "Dashboard checked — alerts cleared", mono: "09:10" },
+    { verb: "Last order fetched, PDF summarised", mono: "09:12" },
+    { verb: "Case stage and directions briefed", mono: "09:14" },
   ],
   "03": [
-    { verb: "Template seeded", mono: "13:55" },
-    { verb: "Citations resolved", mono: "13:58" },
-    { verb: "Sent for review", mono: "14:02" },
+    { verb: "Case data seeded into template", mono: "13:55" },
+    { verb: "Kanoon, ILDC & firm library queried", mono: "13:58" },
+    { verb: "Draft streamed, sent for review", mono: "14:02" },
   ],
   "04": [
-    { verb: "Time captured", mono: "18:30" },
-    { verb: "Invoice generated", mono: "18:42" },
-    { verb: "Payment requested", mono: "18:45" },
+    { verb: "Time entries rolled up", mono: "18:30" },
+    { verb: "Invoice branded, UPI link embedded", mono: "18:42" },
+    { verb: "Sent on WhatsApp, Tally export queued", mono: "18:45" },
   ],
 };
 
