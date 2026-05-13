@@ -284,16 +284,12 @@ export default function FeaturesPage() {
                 <div className="space-y-px bg-rule">
                   {g.modules.map((m) => (
                     <div key={m.no} id={m.slug} className="reveal scroll-mt-28 bg-paper p-7 md:p-9">
-                      <div className="grid grid-cols-12 items-baseline gap-4">
-                        <div className="mono col-span-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-ink-3 md:col-span-1">
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                        <span className="mono text-[12px] font-semibold uppercase tracking-[0.18em] text-ink-3">
                           {m.no}
-                        </div>
-                        <h3 className="col-span-7 text-[20px] font-medium text-ink md:col-span-9">
-                          {m.title}
-                        </h3>
-                        <div className="col-span-3 text-right md:col-span-2">
-                          <Badge variant={m.status}>{m.statusLabel}</Badge>
-                        </div>
+                        </span>
+                        <h3 className="text-[20px] font-medium text-ink">{m.title}</h3>
+                        <Badge variant={m.status}>{m.statusLabel}</Badge>
                       </div>
                       <p className="mt-4 max-w-2xl text-[14.5px] leading-relaxed text-ink-2">
                         {m.blurb}

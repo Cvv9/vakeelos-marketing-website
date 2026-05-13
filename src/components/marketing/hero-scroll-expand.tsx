@@ -197,10 +197,7 @@ export function HeroScrollExpand() {
               transition={{ duration: 0.7 }}
             >
               <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
-                <p className="mono text-[11px] uppercase tracking-[0.22em] text-ink-3">
-                  Invite only · Early access
-                </p>
-                <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-12">
+                <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
                   <div className="lg:col-span-5">
                     <p className="text-[18px] leading-[1.55] text-ink-2">
                       VakeelOS is a single, calm workspace for India&rsquo;s 1.8 million
@@ -208,19 +205,7 @@ export function HeroScrollExpand() {
                       developed in India, hosted in India, verified at the Bar Council.
                     </p>
                     <div className="mt-8 flex flex-wrap items-center gap-3">
-                      <span className="btn-glow rounded-full">
-                        <Link href="/waitlist">
-                          <Button
-                            size="lg"
-                            variant="ink"
-                            className="float-soft press group relative rounded-full px-6"
-                          >
-                            Join the waitlist
-                            <ArrowUpRight className="ml-1.5 h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                          </Button>
-                        </Link>
-                      </span>
-                      <Link href="#services">
+                      <Link href="/features">
                         <Button
                           size="lg"
                           variant="outline"

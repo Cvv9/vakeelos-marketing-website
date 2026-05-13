@@ -69,6 +69,8 @@ export function WorkflowSection({ scrollDriven = false }: { scrollDriven?: boole
   useEffect(() => {
     if (!scrollDriven) return;
     let touchStartY = 0;
+    let lastAdvanceAt = 0;
+    const THROTTLE_MS = 500; // minimum ms between step changes
 
     const isLocked = (): boolean => {
       if (stepsDoneRef.current) return false;
@@ -76,12 +78,16 @@ export function WorkflowSection({ scrollDriven = false }: { scrollDriven?: boole
       if (!el) return false;
       const { top, bottom } = el.getBoundingClientRect();
       const vh = window.innerHeight;
-      // Section is active when its top has entered the upper 15% of viewport
+      // Section is active when its top is within the upper 15% of viewport
       // and its bottom is still well in view
       return top <= vh * 0.15 && bottom >= vh * 0.35;
     };
 
     const advance = (dir: 1 | -1) => {
+      const now = Date.now();
+      if (now - lastAdvanceAt < THROTTLE_MS) return; // throttle rapid scroll events
+      lastAdvanceAt = now;
+
       const curr = activeRef.current;
       const next = Math.max(0, Math.min(STEPS.length - 1, curr + dir));
       if (next !== curr) {
@@ -93,7 +99,7 @@ export function WorkflowSection({ scrollDriven = false }: { scrollDriven?: boole
         setTimeout(() => {
           stepsDoneRef.current = true;
           setStepsDone(true);
-        }, 700);
+        }, 800);
       }
     };
 
@@ -131,13 +137,14 @@ export function WorkflowSection({ scrollDriven = false }: { scrollDriven?: boole
       touchStartY = e.touches[0].clientY;
     };
 
-    // Reset steps when user scrolls back above the section
+    // Reset steps only when the section has scrolled WELL below the viewport
+    // (i.e., user scrolled back up past it entirely — top is below the fold)
     const handleScroll = () => {
       if (!stepsDoneRef.current) return;
       const el = sectionRef.current;
       if (!el) return;
       const { top } = el.getBoundingClientRect();
-      if (top > window.innerHeight * 0.8) {
+      if (top > window.innerHeight * 1.1) {
         stepsDoneRef.current = false;
         activeRef.current = 0;
         setStepsDone(false);

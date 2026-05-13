@@ -17,7 +17,7 @@ function Badge({ className, variant = "ink", ...props }: BadgeProps) {
             variant === "saffron",
           "text-ink-2 before:bg-emerald-500": variant === "live",
           "text-ink-2 before:bg-saffron": variant === "rolling",
-          "text-ink-3 before:bg-ink-4": variant === "soon",
+          "text-ink-2 before:bg-saffron border-saffron/20": variant === "soon",
         },
         className,
       )}
