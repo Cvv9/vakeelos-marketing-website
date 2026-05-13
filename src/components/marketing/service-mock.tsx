@@ -8,7 +8,12 @@ type Kind =
   | "drafter"
   | "research"
   | "invoicing"
-  | "dashboard";
+  | "dashboard"
+  | "hearings"
+  | "orders"
+  | "tasks"
+  | "clients"
+  | "portal";
 
 export function ServiceMock({ kind }: { kind: Kind }) {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -49,6 +54,11 @@ export function ServiceMock({ kind }: { kind: Kind }) {
       {kind === "research" ? <ResearchMock /> : null}
       {kind === "invoicing" ? <InvoicingMock /> : null}
       {kind === "dashboard" ? <DashboardMock /> : null}
+      {kind === "hearings" ? <HearingsMock /> : null}
+      {kind === "orders" ? <OrdersMock /> : null}
+      {kind === "tasks" ? <TasksMock /> : null}
+      {kind === "clients" ? <ClientsMock /> : null}
+      {kind === "portal" ? <PortalMock /> : null}
     </div>
   );
 }
@@ -262,6 +272,168 @@ function DashboardMock() {
             <span className="mono text-[10.5px] uppercase tracking-[0.18em] text-ink-3">
               0{i + 1}
             </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── New mock components ─────────────────────────────────────────────────────
+// Reuse existing animation classes (mock-dashboard-row, mock-research-row,
+// mock-case-row--lead, mock-chip) so no new CSS is needed.
+
+function HearingsMock() {
+  const rows = [
+    { code: "W.P. 4711/2025", court: "Court 12 · APHC", time: "11:00", conflict: false },
+    { code: "C.R.P. 882/2024", court: "Court 7 · APHC",  time: "11:30", conflict: true  },
+  ];
+  return (
+    <div className="flex h-full flex-col">
+      <MockChrome label="Hearings · Thu 16 May" right="2 today" />
+      <div className="flex flex-1 flex-col">
+        {rows.map((r, i) => (
+          <div
+            key={r.code}
+            className="mock-dashboard-row flex items-center justify-between border-b border-rule px-4 py-3"
+            style={{ ["--i" as string]: i }}
+          >
+            <div>
+              <p className="mono text-[10.5px] uppercase tracking-[0.18em] text-ink">{r.code}</p>
+              <p className="mono mt-1 text-[10px] uppercase tracking-[0.18em] text-ink-3">{r.court}</p>
+            </div>
+            <div className="flex items-center gap-2">
+              {r.conflict && (
+                <span className="mock-chip mono rounded-full border border-saffron/30 bg-saffron/10 px-2 py-0.5 text-[9px] uppercase tracking-[0.18em] text-saffron-deep">
+                  Conflict
+                </span>
+              )}
+              <span className="mono text-[10.5px] uppercase tracking-[0.18em] text-ink-3">{r.time}</span>
+            </div>
+          </div>
+        ))}
+        <div className="flex items-center gap-2 px-4 py-3">
+          <span className="block h-1.5 w-1.5 rounded-full bg-emerald-500" />
+          <span className="mono text-[10px] uppercase tracking-[0.18em] text-ink-3">
+            WhatsApp reminder sent · 1:30 PM
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function OrdersMock() {
+  const bullets = [
+    "Result: Interim stay granted",
+    "Relief: Status quo on property",
+    "Direction: Counter within 4 weeks",
+    "Next date: 12 Jun 2025",
+  ];
+  return (
+    <div className="flex h-full flex-col">
+      <MockChrome label="Order · W.P. 4711/2025" right="AI" />
+      <div className="flex flex-1 flex-col px-4 py-3 gap-2">
+        <p className="mono text-[10px] uppercase tracking-[0.22em] text-brand-deep">
+          AI summary · 4 bullets
+        </p>
+        {bullets.map((b, i) => (
+          <div
+            key={b}
+            className="mock-research-row flex items-start gap-2"
+            style={{ ["--i" as string]: i }}
+          >
+            <span className="mt-1.5 block h-px w-3 shrink-0 bg-saffron" />
+            <span className="text-[11.5px] leading-[1.5] text-ink-2">{b}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TasksMock() {
+  const tasks = [
+    { label: "Brief the junior",        time: "1h 20m", done: true  },
+    { label: "Review draft affidavit",  time: "45m",    done: false },
+    { label: "File application by 5 PM",time: "—",      done: false },
+  ];
+  return (
+    <div className="flex h-full flex-col">
+      <MockChrome label="Tasks · Iyer vs Iyer" right="3 open" />
+      <div className="flex flex-1 flex-col">
+        {tasks.map((t, i) => (
+          <div
+            key={t.label}
+            className="mock-dashboard-row flex items-center justify-between border-b border-rule px-4 py-3"
+            style={{ ["--i" as string]: i }}
+          >
+            <div className="flex items-center gap-2.5">
+              <span
+                className={`block h-3.5 w-3.5 flex-shrink-0 rounded-sm border ${
+                  t.done ? "border-brand-deep bg-brand-deep/25" : "border-rule-strong"
+                }`}
+              />
+              <span className={`text-[12.5px] tracking-tight ${t.done ? "line-through text-ink-3" : "text-ink"}`}>
+                {t.label}
+              </span>
+            </div>
+            <span className="mono text-[10px] uppercase tracking-[0.18em] text-ink-3">{t.time}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ClientsMock() {
+  const rows = [
+    { name: "Mehta & Co.", pan: "AABCM1234F", cases: "4 active" },
+    { name: "Rao, R.",      pan: "ADFPR5678K", cases: "2 active" },
+    { name: "Iyer, S.",     pan: "BCHPI9012L", cases: "1 active" },
+  ];
+  return (
+    <div className="flex h-full flex-col">
+      <MockChrome label="Client register" right="42 total" />
+      <div className="flex flex-1 flex-col">
+        {rows.map((r, i) => (
+          <div
+            key={r.name}
+            className={`mock-case-row flex items-center justify-between border-b border-rule px-4 py-3 ${
+              i === 0 ? "mock-case-row--lead" : ""
+            }`}
+          >
+            <div>
+              <p className="text-[13px] font-medium tracking-tight text-ink">{r.name}</p>
+              <p className="mono mt-1 text-[10px] uppercase tracking-[0.18em] text-ink-3">{r.pan}</p>
+            </div>
+            <span className="mono text-[10.5px] uppercase tracking-[0.18em] text-ink-3">{r.cases}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function PortalMock() {
+  const items = [
+    { label: "Hearings this week", value: "2" },
+    { label: "Pending invoice",    value: "₹ 18,000" },
+    { label: "Documents shared",   value: "5" },
+    { label: "Last update",        value: "Today" },
+  ];
+  return (
+    <div className="flex h-full flex-col">
+      <MockChrome label="Portal · Mehta & Co." right="OTP ✓" />
+      <div className="flex flex-1 flex-col">
+        {items.map((item, i) => (
+          <div
+            key={item.label}
+            className="mock-dashboard-row flex items-center justify-between border-b border-rule px-4 py-2.5"
+            style={{ ["--i" as string]: i }}
+          >
+            <span className="text-[12.5px] tracking-tight text-ink-2">{item.label}</span>
+            <span className="mono text-[12px] font-medium text-ink">{item.value}</span>
           </div>
         ))}
       </div>
