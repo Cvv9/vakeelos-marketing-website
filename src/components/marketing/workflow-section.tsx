@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CalendarClock, FileSignature, Gavel, Receipt } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { WorkflowSubsteps } from "@/components/marketing/workflow-substeps";
@@ -44,23 +44,126 @@ const STEPS: {
 
 const AUTO_MS = 6000;
 
-export function WorkflowSection() {
+export function WorkflowSection({ scrollDriven = false }: { scrollDriven?: boolean }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [stepsDone, setStepsDone] = useState(false);
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const activeRef = useRef(0);
+  const stepsDoneRef = useRef(false);
+  // Keep refs in sync with state (runs synchronously during render)
+  activeRef.current = active;
+  stepsDoneRef.current = stepsDone;
+
+  // Auto-timer — disabled in scrollDriven mode
   useEffect(() => {
-    if (paused) return;
+    if (paused || scrollDriven) return;
     const id = setInterval(() => {
       setActive((i) => (i + 1) % STEPS.length);
     }, AUTO_MS);
     return () => clearInterval(id);
-  }, [paused]);
+  }, [paused, scrollDriven]);
+
+  // Scroll-driven step advancement
+  useEffect(() => {
+    if (!scrollDriven) return;
+    let touchStartY = 0;
+
+    const isLocked = (): boolean => {
+      if (stepsDoneRef.current) return false;
+      const el = sectionRef.current;
+      if (!el) return false;
+      const { top, bottom } = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // Section is active when its top has entered the upper 15% of viewport
+      // and its bottom is still well in view
+      return top <= vh * 0.15 && bottom >= vh * 0.35;
+    };
+
+    const advance = (dir: 1 | -1) => {
+      const curr = activeRef.current;
+      const next = Math.max(0, Math.min(STEPS.length - 1, curr + dir));
+      if (next !== curr) {
+        activeRef.current = next;
+        setActive(next);
+      }
+      if (dir === 1 && next === STEPS.length - 1 && !stepsDoneRef.current) {
+        // All steps shown — release scroll after brief pause so user sees last step
+        setTimeout(() => {
+          stepsDoneRef.current = true;
+          setStepsDone(true);
+        }, 700);
+      }
+    };
+
+    const handleWheel = (e: WheelEvent) => {
+      if (e.deltaY > 8) {
+        if (!isLocked()) return;
+        e.preventDefault();
+        advance(1);
+      } else if (e.deltaY < -8) {
+        // Scrolling up — only intercept if not at first step
+        if (activeRef.current === 0) return;
+        if (!isLocked()) return;
+        e.preventDefault();
+        advance(-1);
+      }
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const deltaY = touchStartY - e.touches[0].clientY;
+      if (Math.abs(deltaY) < 25) return;
+      if (deltaY > 0) {
+        if (!isLocked()) return;
+        e.preventDefault();
+        advance(1);
+      } else {
+        if (activeRef.current === 0) return;
+        if (!isLocked()) return;
+        e.preventDefault();
+        advance(-1);
+      }
+      touchStartY = e.touches[0].clientY;
+    };
+
+    // Reset steps when user scrolls back above the section
+    const handleScroll = () => {
+      if (!stepsDoneRef.current) return;
+      const el = sectionRef.current;
+      if (!el) return;
+      const { top } = el.getBoundingClientRect();
+      if (top > window.innerHeight * 0.8) {
+        stepsDoneRef.current = false;
+        activeRef.current = 0;
+        setStepsDone(false);
+        setActive(0);
+      }
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrollDriven]);
 
   const step = STEPS[active];
   const StepIcon = step.Icon;
 
   return (
     <section
+      ref={sectionRef}
       id="workflow"
       className="relative border-b border-rule bg-paper"
     >
@@ -119,7 +222,7 @@ export function WorkflowSection() {
                 }`}
               />
               {String(active + 1).padStart(2, "0")} / 04 ·{" "}
-              {paused ? "paused" : "auto"}
+              {scrollDriven ? (stepsDone ? "done" : "scroll") : paused ? "paused" : "auto"}
             </span>
           </div>
 
@@ -146,6 +249,12 @@ export function WorkflowSection() {
                   auto · 0&nbsp;clicks
                 </span>
               </div>
+              {scrollDriven && (
+                <p className="mono mt-6 flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-ink-4">
+                  <span aria-hidden>↓</span>
+                  <span>{stepsDone ? "Continue scrolling" : active < STEPS.length - 1 ? "Scroll to advance" : "All steps covered"}</span>
+                </p>
+              )}
             </div>
 
             {/* SVG arc timeline — replaces vertical progress rail */}

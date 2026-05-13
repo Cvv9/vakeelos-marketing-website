@@ -9,7 +9,7 @@ import { TransitionLink } from "@/components/effects/transition-link";
 const LEFT_LINKS = [
   { href: "/#services", label: "Services" },
   { href: "/about", label: "About" },
-  { href: "/#workflow", label: "Workflow" },
+  { href: "/workflow", label: "Workflow" },
 ];
 
 const RIGHT_LINKS = [
@@ -24,10 +24,8 @@ export function Nav() {
   const pathname = usePathname();
 
   const isActive = (href: string) => {
-    if (pathname !== "/") return pathname === href;
-    if (href === "/#services") return activeSection === "services";
-    if (href === "/#workflow") return activeSection === "workflow";
-    return pathname === href;
+    if (href === "/#services") return pathname === "/" && activeSection === "services";
+    return pathname === href || pathname.startsWith(href + "/");
   };
 
   useEffect(() => {
@@ -45,7 +43,7 @@ export function Nav() {
 
   useEffect(() => {
     if (pathname !== "/") return;
-    const ids = ["services", "workflow"];
+    const ids = ["services"];
     const observers = ids.map((id) => {
       const el = document.getElementById(id);
       if (!el) return null;

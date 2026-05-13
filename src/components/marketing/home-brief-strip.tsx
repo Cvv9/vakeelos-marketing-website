@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { CrossfadePair } from "@/components/effects/crossfade-pair";
 
 export function HomeBriefStrip() {
@@ -23,6 +26,14 @@ export function HomeBriefStrip() {
               from your case data. Invoices collect over UPI before you leave.
               Less administration. More law. Priced for advocates at every scale.
             </p>
+            <div className="mt-8">
+              <Link href="/about">
+                <Button size="lg" variant="outline" className="press">
+                  About VakeelOS
+                  <ArrowUpRight className="ml-1.5 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
           </div>
 
           <div className="lg:col-span-6 lg:col-start-7">
