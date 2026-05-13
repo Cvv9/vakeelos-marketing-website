@@ -318,8 +318,8 @@ export default function FeaturesPage() {
                       id={m.slug}
                       className="reveal scroll-mt-28 overflow-hidden bg-paper"
                     >
-                      {/* Animated mock UI preview */}
-                      <div className="border-b border-rule">
+                      {/* Animated mock UI preview — override aspect-[4/3] so height matches parent */}
+                      <div className="border-b border-rule h-48 overflow-hidden [&_.service-mock]:aspect-auto [&_.service-mock]:h-full">
                         <ServiceMock kind={m.kind} />
                       </div>
 
