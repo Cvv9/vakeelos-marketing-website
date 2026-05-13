@@ -23,7 +23,7 @@ const STEPS: {
     num: "02",
     title: "Brief",
     meta: "Tuesday · 09:14 IST",
-    body: "Dashboard first — today’s hearings, overnight alerts, pending tasks. Open a case, check the stage, fetch the last order. VakeelBrain reads the PDF; you read the four bullets.",
+    body: "Dashboard first — today's hearings, overnight alerts, pending tasks. Open a case, check the stage, fetch the last order. VakeelBrain reads the PDF; you read the four bullets.",
     Icon: Gavel,
   },
   {
@@ -44,19 +44,21 @@ const STEPS: {
 
 const AUTO_MS = 6000;
 
+// Each step occupies exactly 1 viewport-height of scroll.
+// An extra 0.5 vh lets the user "rest" on the last step before the section scrolls away.
+const SCROLL_HEIGHTS_PER_STEP = 1;
+const LAST_STEP_PAUSE = 0.5;
+const WRAPPER_VH = STEPS.length * SCROLL_HEIGHTS_PER_STEP + LAST_STEP_PAUSE; // 4.5
+
 export function WorkflowSection({ scrollDriven = false }: { scrollDriven?: boolean }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [stepsDone, setStepsDone] = useState(false);
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const activeRef = useRef(0);
-  const stepsDoneRef = useRef(false);
-  // Keep refs in sync with state (runs synchronously during render)
-  activeRef.current = active;
-  stepsDoneRef.current = stepsDone;
+  // Used only in scrollDriven mode — the tall outer div whose scroll position
+  // we convert into an active step index.
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
-  // Auto-timer — disabled in scrollDriven mode
+  // ── Auto-timer (homepage, non-scroll-driven) ──────────────────────────────
   useEffect(() => {
     if (paused || scrollDriven) return;
     const id = setInterval(() => {
@@ -65,112 +67,147 @@ export function WorkflowSection({ scrollDriven = false }: { scrollDriven?: boole
     return () => clearInterval(id);
   }, [paused, scrollDriven]);
 
-  // Scroll-driven step advancement
+  // ── Scroll-driven: purely passive, no event interception ──────────────────
+  // The wrapper div is (STEPS.length + 0.5) × 100vh tall. The sticky section
+  // inside is pinned to the top of the viewport. We read -wrapper.rect.top
+  // (= how many px we've scrolled into the wrapper) and divide by viewport
+  // height to get the step index.
   useEffect(() => {
     if (!scrollDriven) return;
-    let touchStartY = 0;
-    let lastAdvanceAt = 0;
-    const THROTTLE_MS = 500; // minimum ms between step changes
 
-    const isLocked = (): boolean => {
-      if (stepsDoneRef.current) return false;
-      const el = sectionRef.current;
-      if (!el) return false;
-      const { top, bottom } = el.getBoundingClientRect();
+    const onScroll = () => {
+      const wrapper = wrapperRef.current;
+      if (!wrapper) return;
+      const scrolled = -wrapper.getBoundingClientRect().top; // px scrolled into wrapper
       const vh = window.innerHeight;
-      // Section is active when its top is within the upper 15% of viewport
-      // and its bottom is still well in view
-      return top <= vh * 0.15 && bottom >= vh * 0.35;
+      if (scrolled <= 0) { setActive(0); return; }
+      const step = Math.min(
+        STEPS.length - 1,
+        Math.max(0, Math.floor(scrolled / vh))
+      );
+      setActive(step);
     };
 
-    const advance = (dir: 1 | -1) => {
-      const now = Date.now();
-      if (now - lastAdvanceAt < THROTTLE_MS) return; // throttle rapid scroll events
-      lastAdvanceAt = now;
-
-      const curr = activeRef.current;
-      const next = Math.max(0, Math.min(STEPS.length - 1, curr + dir));
-      if (next !== curr) {
-        activeRef.current = next;
-        setActive(next);
-      }
-      if (dir === 1 && next === STEPS.length - 1 && !stepsDoneRef.current) {
-        // All steps shown — release scroll after brief pause so user sees last step
-        setTimeout(() => {
-          stepsDoneRef.current = true;
-          setStepsDone(true);
-        }, 800);
-      }
-    };
-
-    const handleWheel = (e: WheelEvent) => {
-      if (e.deltaY > 8) {
-        if (!isLocked()) return;
-        e.preventDefault();
-        advance(1);
-      } else if (e.deltaY < -8) {
-        // Scrolling up — only intercept if not at first step
-        if (activeRef.current === 0) return;
-        if (!isLocked()) return;
-        e.preventDefault();
-        advance(-1);
-      }
-    };
-
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0].clientY;
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      const deltaY = touchStartY - e.touches[0].clientY;
-      if (Math.abs(deltaY) < 25) return;
-      if (deltaY > 0) {
-        if (!isLocked()) return;
-        e.preventDefault();
-        advance(1);
-      } else {
-        if (activeRef.current === 0) return;
-        if (!isLocked()) return;
-        e.preventDefault();
-        advance(-1);
-      }
-      touchStartY = e.touches[0].clientY;
-    };
-
-    // Reset steps only when the section has scrolled WELL below the viewport
-    // (i.e., user scrolled back up past it entirely — top is below the fold)
-    const handleScroll = () => {
-      if (!stepsDoneRef.current) return;
-      const el = sectionRef.current;
-      if (!el) return;
-      const { top } = el.getBoundingClientRect();
-      if (top > window.innerHeight * 1.1) {
-        stepsDoneRef.current = false;
-        activeRef.current = 0;
-        setStepsDone(false);
-        setActive(0);
-      }
-    };
-
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    window.addEventListener("touchstart", handleTouchStart, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("scroll", handleScroll);
-    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll(); // sync on mount
+    return () => window.removeEventListener("scroll", onScroll);
   }, [scrollDriven]);
 
   const step = STEPS[active];
   const StepIcon = step.Icon;
+  const isLast = active === STEPS.length - 1;
 
+  // ── SCROLL-DRIVEN RENDER ──────────────────────────────────────────────────
+  // The outer div is the tall scroll rail. The inner <section> is sticky so it
+  // stays centered in the viewport while the user scrolls through all steps.
+  if (scrollDriven) {
+    return (
+      <div
+        ref={wrapperRef}
+        className="relative border-b border-rule"
+        style={{ height: `${WRAPPER_VH * 100}vh` }}
+      >
+        <section
+          id="workflow"
+          className="sticky top-0 h-screen overflow-hidden bg-paper"
+        >
+          <div className="bg-rules h-full">
+            <div className="mx-auto flex h-full max-w-7xl flex-col px-6 pb-6 pt-8 lg:px-10 lg:pb-8 lg:pt-10">
+
+              {/* ── Headline + description ─────────────────── */}
+              <div className="grid shrink-0 grid-cols-1 gap-4 lg:grid-cols-12">
+                <div className="lg:col-span-5">
+                  <p className="mono text-[11px] uppercase tracking-[0.22em] text-ink-3">
+                    Workflow
+                  </p>
+                  <h2 className="display-tight mt-2 text-[32px] leading-[1.0] tracking-tight text-ink sm:text-[44px]">
+                    A Tuesday,
+                    <br />
+                    <span className="accent">cleanly billed.</span>
+                  </h2>
+                </div>
+                <div className="hidden lg:col-span-6 lg:col-start-7 lg:flex lg:items-end">
+                  <p className="text-[15px] leading-[1.6] text-ink-2">
+                    Four moves, one workspace. Sync the docket, brief the
+                    matter, draft the document, send the invoice. The system
+                    does the logistics so you can do the lawyering.
+                  </p>
+                </div>
+              </div>
+
+              {/* ── Step pills ────────────────────────────── */}
+              <div className="mt-5 flex shrink-0 flex-wrap items-center gap-2 border-b border-rule pb-4">
+                {STEPS.map((s, i) => {
+                  const isAct = i === active;
+                  return (
+                    <button
+                      key={s.num}
+                      type="button"
+                      onClick={() => setActive(i)}
+                      aria-pressed={isAct}
+                      className={`mono press inline-flex items-center gap-2.5 rounded-full border px-4 py-2 text-[11px] uppercase tracking-[0.22em] transition-all ${
+                        isAct
+                          ? "border-ink bg-ink text-paper"
+                          : "border-rule text-ink-3 hover:border-rule-strong hover:text-ink-2"
+                      }`}
+                    >
+                      <span className="opacity-60">{s.num}</span>
+                      <span>{s.title}</span>
+                    </button>
+                  );
+                })}
+                <span className="mono ml-auto inline-flex items-center gap-2 text-[10.5px] uppercase tracking-[0.22em] text-ink-3">
+                  <span className="float-dot block h-1.5 w-1.5 rounded-full bg-brand-deep" />
+                  {String(active + 1).padStart(2, "0")} / 04 · scroll
+                </span>
+              </div>
+
+              {/* ── Step content + arc ────────────────────── */}
+              <div className="mt-6 grid min-h-0 flex-1 grid-cols-1 gap-6 lg:grid-cols-12">
+                <div
+                  key={`left-${active}`}
+                  className="pull-up flex min-h-0 flex-col lg:col-span-7"
+                >
+                  <p className="mono text-[10.5px] uppercase tracking-[0.22em] text-brand-deep">
+                    {step.meta}
+                  </p>
+                  <h3 className="display-tight mt-3 text-[52px] leading-[0.95] tracking-tight text-ink sm:text-[68px] lg:text-[80px]">
+                    {step.title}
+                  </h3>
+                  <p className="mt-4 max-w-xl text-[15px] leading-[1.6] text-ink-2">
+                    {step.body}
+                  </p>
+                  <WorkflowSubsteps stepNum={step.num} />
+                  <div className="mt-5 flex items-center gap-3 text-ink-3">
+                    <StepIcon className="h-5 w-5 text-brand-deep" />
+                    <span className="mono text-[11px] uppercase tracking-[0.22em]">
+                      auto · 0&nbsp;clicks
+                    </span>
+                  </div>
+                  <p className="mono mt-4 flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-ink-4">
+                    <span aria-hidden>↓</span>
+                    <span>
+                      {isLast ? "Continue scrolling" : "Scroll to advance"}
+                    </span>
+                  </p>
+                </div>
+
+                {/* Arc hidden on mobile to save vertical space */}
+                <div className="hidden lg:flex lg:col-span-5 lg:items-center lg:justify-center">
+                  <WorkflowArc active={active} onSelect={setActive} />
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  // ── AUTO-PLAY RENDER (homepage teaser) ─────────────────────────────────────
   return (
     <section
-      ref={sectionRef}
       id="workflow"
       className="relative border-b border-rule bg-paper"
     >
@@ -204,15 +241,15 @@ export function WorkflowSection({ scrollDriven = false }: { scrollDriven?: boole
             onMouseLeave={() => setPaused(false)}
           >
             {STEPS.map((s, i) => {
-              const isActive = i === active;
+              const isAct = i === active;
               return (
                 <button
                   key={s.num}
                   type="button"
                   onClick={() => setActive(i)}
-                  aria-pressed={isActive}
+                  aria-pressed={isAct}
                   className={`mono press inline-flex items-center gap-2.5 rounded-full border px-4 py-2 text-[11px] uppercase tracking-[0.22em] transition-all ${
-                    isActive
+                    isAct
                       ? "border-ink bg-ink text-paper"
                       : "border-rule text-ink-3 hover:border-rule-strong hover:text-ink-2"
                   }`}
@@ -229,7 +266,7 @@ export function WorkflowSection({ scrollDriven = false }: { scrollDriven?: boole
                 }`}
               />
               {String(active + 1).padStart(2, "0")} / 04 ·{" "}
-              {scrollDriven ? (stepsDone ? "done" : "scroll") : paused ? "paused" : "auto"}
+              {paused ? "paused" : "auto"}
             </span>
           </div>
 
@@ -256,15 +293,9 @@ export function WorkflowSection({ scrollDriven = false }: { scrollDriven?: boole
                   auto · 0&nbsp;clicks
                 </span>
               </div>
-              {scrollDriven && (
-                <p className="mono mt-6 flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-ink-4">
-                  <span aria-hidden>↓</span>
-                  <span>{stepsDone ? "Continue scrolling" : active < STEPS.length - 1 ? "Scroll to advance" : "All steps covered"}</span>
-                </p>
-              )}
             </div>
 
-            {/* SVG arc timeline — replaces vertical progress rail */}
+            {/* SVG arc timeline */}
             <div className="lg:col-span-5 flex items-center justify-center py-4">
               <WorkflowArc active={active} onSelect={setActive} />
             </div>
@@ -276,8 +307,6 @@ export function WorkflowSection({ scrollDriven = false }: { scrollDriven?: boole
 }
 
 // ─── WorkflowArc ──────────────────────────────────────────────────────────────
-// Four nodes on a smooth S-curve. Active node glows brand-gold with a pulse ring;
-// segments to the left of the cursor light up as the step advances.
 
 const ARC_NODES = [
   { x: 45,  y: 110, label: "Sync",  meta: "06:30", isAbove: false },
@@ -353,7 +382,6 @@ function WorkflowArc({
             onKeyDown={(e) => e.key === "Enter" && onSelect(i)}
             style={{ cursor: "pointer" }}
           >
-            {/* Pulse ring */}
             {isActive && (
               <circle
                 cx={n.x}
@@ -366,7 +394,6 @@ function WorkflowArc({
               />
             )}
 
-            {/* Node disc */}
             <circle
               cx={n.x}
               cy={n.y}
@@ -381,7 +408,6 @@ function WorkflowArc({
               style={{ transition: "fill 0.45s, stroke 0.45s" }}
             />
 
-            {/* Step number */}
             <text
               x={n.x}
               y={n.y + 4}
@@ -395,7 +421,6 @@ function WorkflowArc({
               {String(i + 1).padStart(2, "0")}
             </text>
 
-            {/* Step label */}
             <text
               x={n.x}
               y={labelY}
@@ -410,7 +435,6 @@ function WorkflowArc({
               {n.label}
             </text>
 
-            {/* Meta timestamp */}
             <text
               x={n.x}
               y={metaY}

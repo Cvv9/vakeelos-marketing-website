@@ -2,9 +2,23 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { ServiceMock } from "@/components/marketing/service-mock";
 
 type Status = "live" | "rolling" | "soon";
+type Kind =
+  | "case"
+  | "causelist"
+  | "drafter"
+  | "research"
+  | "invoicing"
+  | "dashboard"
+  | "hearings"
+  | "orders"
+  | "tasks"
+  | "clients"
+  | "portal";
 
+// Groups ordered by day-to-day workflow: morning brief → court work → drafting → task/time → billing → client record
 const GROUPS: {
   group: string;
   kicker: string;
@@ -12,6 +26,7 @@ const GROUPS: {
   modules: {
     no: string;
     slug: string;
+    kind: Kind;
     title: string;
     blurb: string;
     bullets: string[];
@@ -28,6 +43,7 @@ const GROUPS: {
       {
         no: "00",
         slug: "dashboard",
+        kind: "dashboard",
         title: "Practice Dashboard",
         blurb:
           "One screen at login. Every matter that needs attention today — hearings, overdue invoices, pending tasks — without opening a single file.",
@@ -49,23 +65,9 @@ const GROUPS: {
       "The four modules a litigation advocate touches every working day. Designed around CNR numbers, daily causelists, and judge-bench rosters — not generic CRM ideas.",
     modules: [
       {
-        no: "01",
-        slug: "cases",
-        title: "Case Register",
-        blurb:
-          "One vault for every matter, party, and document. Filter by court, judge, stage, opposing counsel, or last activity.",
-        bullets: [
-          "CNR-based case identity, populated from eCourts on creation",
-          "Case moves through ten stages — Filing to Execution — so the register shows where each matter sits in the litigation lifecycle, not just open or closed",
-          "Appeals link back to the original matter; related cases cross-reference each other — the full dispute family tree, navigable from any node",
-          "One tap sends a WhatsApp status update to the client — case number, firm name, and your message, delivered to their phone without leaving the case view",
-        ],
-        status: "live",
-        statusLabel: "Live",
-      },
-      {
         no: "02",
         slug: "causelist",
+        kind: "causelist",
         title: "Causelist Sync",
         blurb:
           "Daily causelist pulls from every integrated court into a clean inbox. You tick the rows that are yours; only those become tracked cases.",
@@ -79,8 +81,25 @@ const GROUPS: {
         statusLabel: "Live",
       },
       {
+        no: "01",
+        slug: "cases",
+        kind: "case",
+        title: "Case Register",
+        blurb:
+          "One vault for every matter, party, and document. Filter by court, judge, stage, opposing counsel, or last activity.",
+        bullets: [
+          "CNR-based case identity, populated from eCourts on creation",
+          "Case moves through ten stages — Filing to Execution — so the register shows where each matter sits in the litigation lifecycle, not just open or closed",
+          "Appeals link back to the original matter; related cases cross-reference each other — the full dispute family tree, navigable from any node",
+          "One tap sends a WhatsApp status update to the client — case number, firm name, and your message, delivered to their phone without leaving the case view",
+        ],
+        status: "live",
+        statusLabel: "Live",
+      },
+      {
         no: "03",
         slug: "hearings",
+        kind: "hearings",
         title: "Hearing Tracker",
         blurb:
           "Court-by-court calendar with conflict detection. Reminders go out the day before, on the channel your client actually uses.",
@@ -96,6 +115,7 @@ const GROUPS: {
       {
         no: "04",
         slug: "orders",
+        kind: "orders",
         title: "Court Order Vault",
         blurb:
           "We pull the latest order from the court portal and let VakeelBrain summarise it into the four bullets you actually need.",
@@ -111,44 +131,6 @@ const GROUPS: {
     ],
   },
   {
-    group: "The client",
-    kicker: "09 — 10",
-    intro:
-      "Behind every CNR is a person. VakeelOS holds the full client record — identity, matter history, and billing — and gives them a window into their own case when you choose to open it.",
-    modules: [
-      {
-        no: "10",
-        slug: "clients",
-        title: "Client Register",
-        blurb:
-          "One record per client. Identity documents, matter history, and billing in one place — not spread across a spreadsheet and a WhatsApp chat.",
-        bullets: [
-          "Store PAN, Aadhaar, address, phone, and email alongside every client record",
-          "Individual or company — both supported, with the same linked matter and invoice history",
-          "Every case, invoice, and document links back to the client automatically",
-          "Search by name, phone, or PAN — find anyone in the practice in under two seconds",
-        ],
-        status: "live",
-        statusLabel: "Live",
-      },
-      {
-        no: "09",
-        slug: "portal",
-        title: "Client Portal",
-        blurb:
-          "A read-only dashboard for your client: matter status, next hearing, invoices, shared documents.",
-        bullets: [
-          "Login over OTP — no passwords for your client to forget",
-          "Per-document publish toggle: shared, private, draft",
-          "WhatsApp invite link with OTP fallback over SMS",
-          "Every advocate on the team is Bar Council–verified at onboarding — not just the account owner",
-        ],
-        status: "rolling",
-        statusLabel: "Rolling out",
-      },
-    ],
-  },
-  {
     group: "VakeelBrain",
     kicker: "05 — 06",
     intro:
@@ -157,6 +139,7 @@ const GROUPS: {
       {
         no: "05",
         slug: "drafter",
+        kind: "drafter",
         title: "VakeelBrain Drafter",
         blurb:
           "Seven court-ready document types, each seeded from your case data. Not a blank chatbot — a junior's first cut that already knows the parties, the CNR, and the last order.",
@@ -172,6 +155,7 @@ const GROUPS: {
       {
         no: "06",
         slug: "research",
+        kind: "research",
         title: "VakeelBrain Research",
         blurb:
           "Ask in plain English. Get an answer grounded in three Indian legal corpora — and your own firm's documents.",
@@ -195,6 +179,7 @@ const GROUPS: {
       {
         no: "08",
         slug: "tasks",
+        kind: "tasks",
         title: "Tasks & Time",
         blurb:
           "Kanban-style follow-ups linked to a case. Subtasks, comment threads, and file attachments keep the brief trail on the card — not in a WhatsApp group.",
@@ -218,6 +203,7 @@ const GROUPS: {
       {
         no: "07",
         slug: "invoicing",
+        kind: "invoicing",
         title: "Net Invoicing",
         blurb:
           "Send a clean invoice with your firm's letterhead and a Razorpay UPI link over WhatsApp. 60% of invoices are paid within 24 hours in our beta cohort.",
@@ -229,6 +215,46 @@ const GROUPS: {
         ],
         status: "live",
         statusLabel: "Live",
+      },
+    ],
+  },
+  {
+    group: "The client",
+    kicker: "09 — 10",
+    intro:
+      "Behind every CNR is a person. VakeelOS holds the full client record — identity, matter history, and billing — and gives them a window into their own case when you choose to open it.",
+    modules: [
+      {
+        no: "10",
+        slug: "clients",
+        kind: "clients",
+        title: "Client Register",
+        blurb:
+          "One record per client. Identity documents, matter history, and billing in one place — not spread across a spreadsheet and a WhatsApp chat.",
+        bullets: [
+          "Store PAN, Aadhaar, address, phone, and email alongside every client record",
+          "Individual or company — both supported, with the same linked matter and invoice history",
+          "Every case, invoice, and document links back to the client automatically",
+          "Search by name, phone, or PAN — find anyone in the practice in under two seconds",
+        ],
+        status: "live",
+        statusLabel: "Live",
+      },
+      {
+        no: "09",
+        slug: "portal",
+        kind: "portal",
+        title: "Client Portal",
+        blurb:
+          "A read-only dashboard for your client: matter status, next hearing, invoices, shared documents.",
+        bullets: [
+          "Login over OTP — no passwords for your client to forget",
+          "Per-document publish toggle: shared, private, draft",
+          "WhatsApp invite link with OTP fallback over SMS",
+          "Every advocate on the team is Bar Council–verified at onboarding — not just the account owner",
+        ],
+        status: "rolling",
+        statusLabel: "Rolling out",
       },
     ],
   },
@@ -265,10 +291,12 @@ export default function FeaturesPage() {
       {GROUPS.map((g, gi) => (
         <section
           key={g.group}
+          id={g.modules[0]?.slug}
           className={gi % 2 === 0 ? "bg-paper" : "bg-paper-2 border-y border-rule"}
         >
           <div className="mx-auto max-w-7xl px-6 py-20 md:py-28 lg:px-10">
             <div className="grid grid-cols-12 gap-10">
+              {/* Left: group label + intro */}
               <div className="col-span-12 md:col-span-4">
                 <div className="mono text-[12px] font-semibold uppercase tracking-[0.2em] text-ink-3">
                   {g.kicker}
@@ -280,28 +308,42 @@ export default function FeaturesPage() {
                   {g.intro}
                 </p>
               </div>
+
+              {/* Right: module cards */}
               <div className="col-span-12 md:col-span-8">
                 <div className="space-y-px bg-rule">
                   {g.modules.map((m) => (
-                    <div key={m.no} id={m.slug} className="reveal scroll-mt-28 bg-paper p-7 md:p-9">
-                      <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                        <span className="mono text-[12px] font-semibold uppercase tracking-[0.18em] text-ink-3">
-                          {m.no}
-                        </span>
-                        <h3 className="text-[20px] font-medium text-ink">{m.title}</h3>
-                        <Badge variant={m.status}>{m.statusLabel}</Badge>
+                    <div
+                      key={m.no}
+                      id={m.slug}
+                      className="reveal scroll-mt-28 overflow-hidden bg-paper"
+                    >
+                      {/* Animated mock UI preview */}
+                      <div className="border-b border-rule">
+                        <ServiceMock kind={m.kind} />
                       </div>
-                      <p className="mt-4 max-w-2xl text-[14.5px] leading-relaxed text-ink-2">
-                        {m.blurb}
-                      </p>
-                      <ul className="mt-5 grid grid-cols-1 gap-y-2 text-[13px] text-ink-2 md:grid-cols-2 md:gap-x-6">
-                        {m.bullets.map((b) => (
-                          <li key={b} className="flex gap-3 leading-relaxed">
-                            <span className="mt-2 block h-px w-3 shrink-0 bg-saffron" />
-                            <span>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
+
+                      {/* Text content */}
+                      <div className="p-7 md:p-9">
+                        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                          <span className="mono text-[12px] font-semibold uppercase tracking-[0.18em] text-ink-3">
+                            {m.no}
+                          </span>
+                          <h3 className="text-[20px] font-medium text-ink">{m.title}</h3>
+                          <Badge variant={m.status}>{m.statusLabel}</Badge>
+                        </div>
+                        <p className="mt-4 max-w-2xl text-[14.5px] leading-relaxed text-ink-2">
+                          {m.blurb}
+                        </p>
+                        <ul className="mt-5 grid grid-cols-1 gap-y-2 text-[13px] text-ink-2 md:grid-cols-2 md:gap-x-6">
+                          {m.bullets.map((b) => (
+                            <li key={b} className="flex gap-3 leading-relaxed">
+                              <span className="mt-2 block h-px w-3 shrink-0 bg-saffron" />
+                              <span>{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   ))}
                 </div>

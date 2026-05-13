@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { TransitionLink } from "@/components/effects/transition-link";
 
 const LEFT_LINKS = [
-  { href: "/#services", label: "Services" },
+  { href: "/features", label: "Services" },
   { href: "/about", label: "About" },
   { href: "/workflow", label: "Workflow" },
 ];
@@ -20,13 +20,28 @@ const RIGHT_LINKS = [
 
 export function Nav() {
   const [stuck, setStuck] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [navVisible, setNavVisible] = useState(false);
+  const hideTimerRef = useRef<number | null>(null);
   const pathname = usePathname();
 
-  const isActive = (href: string) => {
-    if (href === "/#services") return pathname === "/" && activeSection === "services";
-    return pathname === href || pathname.startsWith(href + "/");
-  };
+  // Show nav on scroll, then auto-hide after 2.5 s of inactivity.
+  // Also reveal on mouse entering the header area.
+  const showNav = useCallback(() => {
+    setNavVisible(true);
+    if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+    hideTimerRef.current = window.setTimeout(() => setNavVisible(false), 2500);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", showNav, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", showNav);
+      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+    };
+  }, [showNav]);
+
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(href + "/");
 
   useEffect(() => {
     // On inner pages, always show the compact pill — no scroll needed.
@@ -41,24 +56,6 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [pathname]);
 
-  useEffect(() => {
-    if (pathname !== "/") return;
-    const ids = ["services"];
-    const observers = ids.map((id) => {
-      const el = document.getElementById(id);
-      if (!el) return null;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id);
-          else setActiveSection((curr) => (curr === id ? "" : curr));
-        },
-        { threshold: 0.25 }
-      );
-      obs.observe(el);
-      return obs;
-    });
-    return () => observers.forEach((o) => o?.disconnect());
-  }, [pathname]);
 
   return (
     <>
@@ -75,10 +72,15 @@ export function Nav() {
           Outer slot height is locked so the pill can shrink without
           reflowing the page (prevents CLS). pointer-events-none on the
           slot lets the user click underlying content where the pill isn't. */}
-      <header className="pointer-events-none sticky top-0 z-50">
+      <header
+        className="pointer-events-none sticky top-0 z-50"
+        onMouseEnter={showNav}
+      >
         <div className="pointer-events-none mx-auto flex h-[136px] max-w-7xl items-center justify-center px-6 md:h-[168px] lg:h-[200px] lg:px-10">
           <div
             className={`pointer-events-auto relative transition-all duration-300 ease-out ${
+              navVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
+            } ${
               stuck
                 ? "mx-auto w-fit rounded-full bg-paper/55 px-5 py-2 ring-1 ring-inset ring-white/15 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.55)] backdrop-blur-2xl backdrop-saturate-150 lg:px-7 lg:py-2"
                 : "w-full"

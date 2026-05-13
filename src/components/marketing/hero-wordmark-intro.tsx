@@ -57,7 +57,7 @@ export function HeroWordmarkIntro() {
     >
       <div className="flex flex-col items-center gap-8">
         <span className="hero-intro-mono mono text-[10.5px] uppercase tracking-[0.32em] text-ink-3">
-          Vakeel<span className="accent">OS</span> · Practice management for India
+          Vakeel<span className="accent">OS</span> · The advocate&rsquo;s operating system
         </span>
         <h2 className="display-tight hero-intro-wordmark text-[44px] font-medium leading-[0.92] tracking-tight text-ink sm:text-[88px] lg:text-[120px]">
           {"For the".split("").map((c, i) => (

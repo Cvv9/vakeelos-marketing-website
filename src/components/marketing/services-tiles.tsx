@@ -15,6 +15,9 @@ type Kind =
   | "clients"
   | "portal";
 
+// Six highest-impact modules in day-to-day workflow order.
+// Remaining five (Hearing Tracker, Case Management, Tasks & Time,
+// Client Register, Client Portal) are detailed at /features.
 const SERVICES: {
   num: string;
   title: string;
@@ -39,12 +42,12 @@ const SERVICES: {
     kind: "causelist",
   },
   {
-    num: "01",
-    title: "Case Management",
+    num: "04",
+    title: "Court Order Vault",
     blurb:
-      "CNR-aware register, party graph, document vault, every order in one drawer.",
-    href: "/features#cases",
-    kind: "case",
+      "Order PDF auto-fetched. VakeelBrain surfaces four bullets: result, relief, directions, next date.",
+    href: "/features#orders",
+    kind: "orders",
   },
   {
     num: "05",
@@ -70,46 +73,15 @@ const SERVICES: {
     href: "/features#invoicing",
     kind: "invoicing",
   },
-  {
-    num: "03",
-    title: "Hearing Tracker",
-    blurb:
-      "Court-by-court calendar with conflict detection. WhatsApp reminder at 1:30 PM IST the day before.",
-    href: "/features#hearings",
-    kind: "hearings",
-  },
-  {
-    num: "04",
-    title: "Court Order Vault",
-    blurb:
-      "Order PDF auto-fetched. VakeelBrain surfaces four bullets: result, relief, directions, next date.",
-    href: "/features#orders",
-    kind: "orders",
-  },
-  {
-    num: "08",
-    title: "Tasks & Time",
-    blurb:
-      "Kanban-style follow-ups linked to a case. Time entries roll into a draft invoice in two clicks.",
-    href: "/features#tasks",
-    kind: "tasks",
-  },
-  {
-    num: "10",
-    title: "Client Register",
-    blurb:
-      "One record per client — identity, matter history, and billing — searchable by name, phone, or PAN.",
-    href: "/features#clients",
-    kind: "clients",
-  },
-  {
-    num: "09",
-    title: "Client Portal",
-    blurb:
-      "Read-only dashboard for your client: matter status, next hearing, invoices. Login over OTP.",
-    href: "/features#portal",
-    kind: "portal",
-  },
+];
+
+// The five modules not shown in the homepage grid
+const REMAINING = [
+  "Hearing Tracker",
+  "Case Management",
+  "Tasks & Time",
+  "Client Register",
+  "Client Portal",
 ];
 
 export function ServicesTiles() {
@@ -141,6 +113,7 @@ export function ServicesTiles() {
           </div>
         </div>
 
+        {/* Six feature tiles */}
         <div className="grid grid-cols-1 gap-px bg-rule sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s) => (
             <Link
@@ -166,6 +139,25 @@ export function ServicesTiles() {
             </Link>
           ))}
         </div>
+
+        {/* "See all 11" CTA — spans the full grid width */}
+        <Link
+          href="/features"
+          className="group flex items-center justify-between gap-6 border-t border-rule bg-paper px-6 py-6 transition-colors hover:bg-paper-2 lg:px-8"
+        >
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <span className="mono text-[10.5px] uppercase tracking-[0.22em] text-ink-3">
+              +5 more
+            </span>
+            <span className="text-[13.5px] text-ink-3">
+              {REMAINING.join(" · ")}
+            </span>
+          </div>
+          <span className="mono inline-flex shrink-0 items-center gap-1.5 text-[11px] uppercase tracking-[0.22em] text-ink-2 transition-colors group-hover:text-ink">
+            See all 11 modules
+            <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </span>
+        </Link>
       </div>
     </section>
   );

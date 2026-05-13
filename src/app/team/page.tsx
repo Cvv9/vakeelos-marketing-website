@@ -20,7 +20,7 @@ const MEMBERS = [
     initials: "CTO",
     name: "Varun Cumbamangalam",
     role: "CTO & Co-Founder",
-    bio: "Fifteen years between the lab and the line: 8+ as a university research assistant, then 7+ shipping IoT, Edge AI, and AI-native products across healthcare and wearables in four countries. Brings the same first-principles, every-layer-owned discipline to VakeelOS: no black boxes between the advocate and the law.",
+    bio: "Varun brings 15+ years of experience across academic research, product management, and hands-on engineering. He spent over 8 years in university research before moving into industry, where he has spent the last 7+ years building and shipping IoT, Edge AI, and AI-native products across healthcare and wearables in four countries. At VakeelOS, he applies the same first-principles, end-to-end discipline to build trustworthy legal technology—with no black boxes between the advocate and the law.",
     linkedin: "https://www.linkedin.com/in/varuncumbamangalam/",
     site: "https://varunc.com",
     photo: "/varun-headshot.jpg",
