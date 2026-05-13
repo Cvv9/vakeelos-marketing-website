@@ -20,6 +20,29 @@ const GROUPS: {
   }[];
 }[] = [
   {
+    group: "Command centre",
+    kicker: "00",
+    intro:
+      "The first screen every morning. Before you open a brief, you need to know where you stand — hearings, tasks, and pending money surface in one view before you touch a single file.",
+    modules: [
+      {
+        no: "00",
+        slug: "dashboard",
+        title: "Practice Dashboard",
+        blurb:
+          "One screen at login. Every matter that needs attention today — hearings, overdue invoices, pending tasks — without opening a single file.",
+        bullets: [
+          "KPI strip: active cases, week's hearings, pending tasks, pending invoices — updated live",
+          "Upcoming 24-hour alerts so nothing blindsides you in the corridor",
+          "Monthly calendar shows all hearing dates and task deadlines on one grid",
+          "One search bar — CNR number, client name, task keyword — finds it wherever it lives in the system",
+        ],
+        status: "live",
+        statusLabel: "Live",
+      },
+    ],
+  },
+  {
     group: "Court-side",
     kicker: "01 — 04",
     intro:
@@ -33,9 +56,9 @@ const GROUPS: {
           "One vault for every matter, party, and document. Filter by court, judge, stage, opposing counsel, or last activity.",
         bullets: [
           "CNR-based case identity, populated from eCourts on creation",
-          "Parties, advocates, and IAs tracked separately, with WhatsApp/email per party",
-          "Document vault with full-text search across PDFs and images",
-          "Linked timeline of hearings, orders, drafts, invoices",
+          "Case moves through ten stages — Filing to Execution — so the register shows where each matter sits in the litigation lifecycle, not just open or closed",
+          "Appeals link back to the original matter; related cases cross-reference each other — the full dispute family tree, navigable from any node",
+          "One tap sends a WhatsApp status update to the client — case number, firm name, and your message, delivered to their phone without leaving the case view",
         ],
         status: "live",
         statusLabel: "Live",
@@ -45,11 +68,11 @@ const GROUPS: {
         slug: "causelist",
         title: "Causelist Sync",
         blurb:
-          "Daily causelist pulls from every integrated High Court into a clean inbox. You tick the rows that are yours; only those become tracked cases.",
+          "Daily causelist pulls from every integrated court into a clean inbox. You tick the rows that are yours; only those become tracked cases.",
         bullets: [
           "Selective tracking — your case list never drowns in stranger names",
+          "District court causelists pulled alongside High Courts — same clean inbox, same selective-tracking model",
           "11,200+ entries pulled per month, with quiet drift detection in the background",
-          "On recurrence, the same matter auto-links and a hearing is scheduled",
           "More High Courts rolling out: KHC, DHC, BHC, MHC",
         ],
         status: "live",
@@ -60,11 +83,11 @@ const GROUPS: {
         slug: "hearings",
         title: "Hearing Tracker",
         blurb:
-          "Court-by-court calendar with conflict detection. Reminders go out the night before, on the channel your client actually uses.",
+          "Court-by-court calendar with conflict detection. Reminders go out the day before, on the channel your client actually uses.",
         bullets: [
           "Conflict detection across courts, juniors, and clerks",
-          "WhatsApp templates pre-approved with WATI: hearing_reminder, overdue_invoice",
-          "Adjournment ladder visible across the case timeline",
+          "WhatsApp reminder delivered at 1:30 PM IST the day before — pre-approved templates, zero setup, lands on the channel your client already uses",
+          "Overdue invoice nudge runs at 2:30 PM IST on the same channel — legal update and billing reminder in one thread",
           "Court-corridor mobile view for quick item-number lookup",
         ],
         status: "live",
@@ -77,13 +100,51 @@ const GROUPS: {
         blurb:
           "We pull the latest order from the court portal and let VakeelBrain summarise it into the four bullets you actually need.",
         bullets: [
-          "Order PDF auto-fetched within hours of upload",
+          "Order PDF auto-fetched within hours of upload to the court portal",
           "AI summary: result, interim relief, directions, next date",
           "Stored as a Document and a Case Note in one atomic step",
           "Manual override: paste a PDF and ask for the same summary",
         ],
         status: "live",
         statusLabel: "Live",
+      },
+    ],
+  },
+  {
+    group: "The client",
+    kicker: "09 — 10",
+    intro:
+      "Behind every CNR is a person. VakeelOS holds the full client record — identity, matter history, and billing — and gives them a window into their own case when you choose to open it.",
+    modules: [
+      {
+        no: "10",
+        slug: "clients",
+        title: "Client Register",
+        blurb:
+          "One record per client. Identity documents, matter history, and billing in one place — not spread across a spreadsheet and a WhatsApp chat.",
+        bullets: [
+          "Store PAN, Aadhaar, address, phone, and email alongside every client record",
+          "Individual or company — both supported, with the same linked matter and invoice history",
+          "Every case, invoice, and document links back to the client automatically",
+          "Search by name, phone, or PAN — find anyone in the practice in under two seconds",
+        ],
+        status: "live",
+        statusLabel: "Live",
+      },
+      {
+        no: "09",
+        slug: "portal",
+        title: "Client Portal",
+        blurb:
+          "A read-only dashboard for your client: matter status, next hearing, invoices, shared documents.",
+        bullets: [
+          "Login over OTP — no passwords for your client to forget",
+          "Per-document publish toggle: shared, private, draft",
+          "WhatsApp invite link with OTP fallback over SMS",
+          "Every advocate on the team is Bar Council–verified at onboarding — not just the account owner",
+        ],
+        status: "rolling",
+        statusLabel: "Rolling out",
       },
     ],
   },
@@ -98,12 +159,12 @@ const GROUPS: {
         slug: "drafter",
         title: "VakeelBrain Drafter",
         blurb:
-          "Indian court templates filled from your case data: bail applications, plaints, replies, legal notices, and rejoinders.",
+          "Seven court-ready document types, each seeded from your case data. Not a blank chatbot — a junior's first cut that already knows the parties, the CNR, and the last order.",
         bullets: [
-          "Drafted from party names, CNR, prior orders — not a blank chatbot",
-          "Streams in your editor, refine inline like a junior's first cut",
-          "Export to .docx or PDF, signed by senior in the workflow",
-          "20 drafts/month included on Solo, unlimited on Firm",
+          "Seven templates: Legal Notice, Bail Application, Plaint, Written Statement, Affidavit, Vakalatnama, Writ Petition",
+          "Drafted from party names, CNR, and prior orders — context is already filled in before you read the first line",
+          "Refine iteratively — give VakeelBrain a specific instruction and it rewrites the relevant section only",
+          "Export to .docx or PDF, signed by senior in the workflow; 20 drafts/month on Solo, unlimited on Firm",
         ],
         status: "soon",
         statusLabel: "In development",
@@ -113,12 +174,12 @@ const GROUPS: {
         slug: "research",
         title: "VakeelBrain Research",
         blurb:
-          "RAG over Indian Kanoon. Ask in plain English. Get an answer with citations you can verify and cite.",
+          "Ask in plain English. Get an answer grounded in three Indian legal corpora — and your own firm's documents.",
         bullets: [
-          "Citations grounded in retrieved judgment chunks, not invented",
-          "Repeat queries cached for instant lookup, scoped to your firm",
-          "Manupatra and SCC Online roadmap for Phase 2 (FY27)",
-          "Your queries and uploads never train any foundational model",
+          "Searches Indian Kanoon, ILDC, and India Code in one query — three corpora, one result set",
+          "Search your own firm's uploaded documents the same way — past plaints, precedents, client memos alongside the public corpus",
+          "Citations verified before they surface — only judgments that exist in the retrieved source are cited, never invented",
+          "Your queries and uploads never train any foundational model — contractually",
         ],
         status: "soon",
         statusLabel: "In development",
@@ -126,37 +187,22 @@ const GROUPS: {
     ],
   },
   {
-    group: "Money & matters",
-    kicker: "07 — 08",
+    group: "The work",
+    kicker: "08",
     intro:
-      "Net invoicing built for the Indian bar — per-appearance fees, retainers, disbursements — and a Kanban board that knows about cases, not generic projects.",
+      "Kanban-style task management built around cases, not projects. With subtasks, comment threads, and a billable timer per matter — no separate timesheet to reconcile at month-end.",
     modules: [
-      {
-        no: "07",
-        slug: "invoicing",
-        title: "Net Invoicing",
-        blurb:
-          "Send a clean invoice with a Razorpay UPI link over WhatsApp. 60% of invoices are paid within 24 hours in our beta cohort.",
-        bullets: [
-          "INR/paise net totals — no tax-code automation, no double entry",
-          "UPI deep links, embedded payment page, real-time paid status",
-          "Overdue reminder cadence with editable copy",
-          "Per-case revenue rollup; export to Tally on Firm tier",
-        ],
-        status: "live",
-        statusLabel: "Live",
-      },
       {
         no: "08",
         slug: "tasks",
         title: "Tasks & Time",
         blurb:
-          "Kanban-style follow-ups linked to a case. A billable timer per matter — no separate timesheet to chase at month-end.",
+          "Kanban-style follow-ups linked to a case. Subtasks, comment threads, and file attachments keep the brief trail on the card — not in a WhatsApp group.",
         bullets: [
-          "Tasks and time entries are first-class on the case timeline",
-          "Assignee, due date, status — visible to senior, junior, clerk",
-          "Time entries roll up into a draft invoice in two clicks",
-          "Filter by court, judge, or matter type when planning the week",
+          "Subtasks for multi-step follow-ups — brief the junior, review the draft, file the application — each tracked separately under one parent",
+          "Comment threads on each task — questions, decisions, and attachments stored on the card, not lost in a group chat",
+          "Assign a task to a junior, associate, or clerk and they get a WhatsApp notification instantly — no separate ping, no group chat, no missed follow-up",
+          "Time entries roll up into a draft invoice in two clicks — the month closes itself",
         ],
         status: "live",
         statusLabel: "Live",
@@ -164,25 +210,25 @@ const GROUPS: {
     ],
   },
   {
-    group: "Clients & comms",
-    kicker: "09",
+    group: "Close of matter",
+    kicker: "07",
     intro:
-      "Your client checks status without picking up the phone. They see exactly what you publish, nothing more.",
+      "Net invoicing built for the Indian bar — per-appearance fees, retainers, disbursements — with your firm's letterhead, UPI links, WhatsApp reminders, and a clean Tally export.",
     modules: [
       {
-        no: "09",
-        slug: "portal",
-        title: "Client Portal",
+        no: "07",
+        slug: "invoicing",
+        title: "Net Invoicing",
         blurb:
-          "A read-only dashboard for your client: matter status, next hearing, invoices, shared documents.",
+          "Send a clean invoice with your firm's letterhead and a Razorpay UPI link over WhatsApp. 60% of invoices are paid within 24 hours in our beta cohort.",
         bullets: [
-          "Login over OTP — no passwords for your client to forget",
-          "Per-document publish toggle: shared, private, draft",
-          "WhatsApp invite link with an OTP fallback over SMS",
-          "Audit log of every client view and download",
+          "Invoices carry your logo, brand colour, footer, and payment terms — they go out looking like your firm, not a SaaS template",
+          "Log cash, cheque, and bank transfers alongside UPI — every payment method tracked, every rupee accounted for",
+          "Overdue reminder runs on WhatsApp automatically — a nudge on the channel your client already uses, no awkward phone call",
+          "Month's invoices export to Tally in one step — no double entry, no reconciliation ritual",
         ],
-        status: "rolling",
-        statusLabel: "Rolling out",
+        status: "live",
+        statusLabel: "Live",
       },
     ],
   },
@@ -200,7 +246,7 @@ export default function FeaturesPage() {
                 Features · the full module list
               </div>
               <h1 className="reveal display-tight mt-7 text-[44px] font-semibold leading-[0.98] md:text-[68px]">
-                Nine modules.{" "}
+                Eleven modules.{" "}
                 <span className="accent text-saffron-deep">One operating system.</span>
               </h1>
             </div>
