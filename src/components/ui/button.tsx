@@ -5,17 +5,15 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "ink" | "saffron" | "outline" | "ghost" | "link";
   size?: "default" | "sm" | "lg" | "icon";
-  asChild?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { className, variant = "ink", size = "default", asChild = false, ...props },
+    { className, variant = "ink", size = "default", ...props },
     ref,
   ) => {
-    const Comp = asChild ? "span" : "button";
     return (
-      <Comp
+      <button
         className={cn(
           "inline-flex items-center justify-center whitespace-nowrap rounded-[3px] font-medium tracking-tight transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron focus-visible:ring-offset-2 focus-visible:ring-offset-paper disabled:pointer-events-none disabled:opacity-50",
           {
