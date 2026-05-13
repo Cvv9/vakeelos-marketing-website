@@ -51,12 +51,14 @@ function ClosingCta() {
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link href="/waitlist">
-                <Button size="lg" variant="ink" className="press w-full sm:w-auto">
-                  Join the waitlist
-                  <ArrowUpRight className="ml-1.5 h-4 w-4" />
-                </Button>
-              </Link>
+              <span className="btn-glow rounded-[3px]">
+                <Link href="/waitlist">
+                  <Button size="lg" variant="ink" className="press relative w-full sm:w-auto">
+                    Join the waitlist
+                    <ArrowUpRight className="ml-1.5 h-4 w-4" />
+                  </Button>
+                </Link>
+              </span>
               <Link href="/contact">
                 <Button size="lg" variant="outline" className="press w-full sm:w-auto">
                   Contact us

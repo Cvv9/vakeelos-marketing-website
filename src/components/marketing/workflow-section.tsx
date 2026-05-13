@@ -148,52 +148,168 @@ export function WorkflowSection() {
               </div>
             </div>
 
-            {/* progress rail */}
-            <ol className="lg:col-span-5">
-              {STEPS.map((s, i) => {
-                const isActive = i === active;
-                return (
-                  <li key={s.num}>
-                    <button
-                      type="button"
-                      onClick={() => setActive(i)}
-                      aria-current={isActive ? "step" : undefined}
-                      className={`group relative flex w-full items-center justify-between border-b border-rule py-5 pl-6 pr-2 text-left transition-colors ${
-                        isActive ? "text-ink" : "text-ink-3 hover:text-ink-2"
-                      }`}
-                    >
-                      <span
-                        aria-hidden
-                        className={`absolute left-0 top-0 h-full w-[2px] transition-colors ${
-                          isActive ? "bg-brand" : "bg-transparent"
-                        }`}
-                      />
-                      <div className="flex items-center gap-4">
-                        <span className="mono text-[10.5px] uppercase tracking-[0.22em]">
-                          Step {s.num}
-                        </span>
-                        <span className="font-sans text-[16px] font-medium tracking-tight">
-                          {s.title}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <span className="mono text-[10.5px] uppercase tracking-[0.16em] opacity-70">
-                          {s.meta.split(" · ")[1]}
-                        </span>
-                        <s.Icon
-                          className={`h-4 w-4 transition-colors ${
-                            isActive ? "text-brand-deep" : ""
-                          }`}
-                        />
-                      </div>
-                    </button>
-                  </li>
-                );
-              })}
-            </ol>
+            {/* SVG arc timeline — replaces vertical progress rail */}
+            <div className="lg:col-span-5 flex items-center justify-center py-4">
+              <WorkflowArc active={active} onSelect={setActive} />
+            </div>
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+// ─── WorkflowArc ──────────────────────────────────────────────────────────────
+// Four nodes on a smooth S-curve. Active node glows brand-gold with a pulse ring;
+// segments to the left of the cursor light up as the step advances.
+
+const ARC_NODES = [
+  { x: 45,  y: 110, label: "Sync",  meta: "06:30", isAbove: false },
+  { x: 180, y: 50,  label: "Brief", meta: "09:14", isAbove: true  },
+  { x: 320, y: 120, label: "Draft", meta: "14:02", isAbove: false },
+  { x: 455, y: 62,  label: "Bill",  meta: "18:45", isAbove: true  },
+] as const;
+
+const ARC_SEGMENTS = [
+  "M 45,110 C 105,110 118,50 180,50",
+  "M 180,50 C 242,50 258,120 320,120",
+  "M 320,120 C 382,120 395,62 455,62",
+] as const;
+
+function WorkflowArc({
+  active,
+  onSelect,
+}: {
+  active: number;
+  onSelect: (i: number) => void;
+}) {
+  return (
+    <svg
+      viewBox="0 0 500 175"
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-full max-w-md"
+      style={{ overflow: "visible" }}
+      aria-label="A Tuesday at the bar — step timeline"
+      role="img"
+    >
+      {/* Base track */}
+      {ARC_SEGMENTS.map((d, i) => (
+        <path
+          key={`base-${i}`}
+          d={d}
+          fill="none"
+          stroke="var(--rule-strong)"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
+      ))}
+
+      {/* Active / past glow overlay */}
+      {ARC_SEGMENTS.map((d, i) =>
+        active > i ? (
+          <path
+            key={`glow-${i}`}
+            d={d}
+            fill="none"
+            stroke="var(--brand)"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeOpacity={0.65}
+          />
+        ) : null
+      )}
+
+      {/* Nodes */}
+      {ARC_NODES.map((n, i) => {
+        const isActive = i === active;
+        const isPast   = i < active;
+        const labelY   = n.isAbove ? n.y - 24 : n.y + 30;
+        const metaY    = n.isAbove ? n.y - 11 : n.y + 44;
+
+        return (
+          <g
+            key={i}
+            tabIndex={0}
+            role="button"
+            aria-label={`Step ${i + 1}: ${n.label}`}
+            aria-pressed={isActive}
+            onClick={() => onSelect(i)}
+            onKeyDown={(e) => e.key === "Enter" && onSelect(i)}
+            style={{ cursor: "pointer" }}
+          >
+            {/* Pulse ring */}
+            {isActive && (
+              <circle
+                cx={n.x}
+                cy={n.y}
+                r="22"
+                fill="none"
+                stroke="var(--brand)"
+                strokeWidth="1"
+                className="workflow-node-pulse"
+              />
+            )}
+
+            {/* Node disc */}
+            <circle
+              cx={n.x}
+              cy={n.y}
+              r="13"
+              fill={
+                isActive ? "var(--brand-deep)"
+                : isPast  ? "var(--paper-3)"
+                :           "var(--paper-2)"
+              }
+              stroke={isActive || isPast ? "var(--brand)" : "var(--rule-strong)"}
+              strokeWidth="1.5"
+              style={{ transition: "fill 0.45s, stroke 0.45s" }}
+            />
+
+            {/* Step number */}
+            <text
+              x={n.x}
+              y={n.y + 4}
+              textAnchor="middle"
+              fontSize="9"
+              fill={isActive ? "var(--ink)" : isPast ? "var(--brand)" : "var(--ink-4)"}
+              fontFamily="var(--font-jetbrains-mono, ui-monospace, monospace)"
+              letterSpacing="0.05em"
+              style={{ userSelect: "none", transition: "fill 0.45s" }}
+            >
+              {String(i + 1).padStart(2, "0")}
+            </text>
+
+            {/* Step label */}
+            <text
+              x={n.x}
+              y={labelY}
+              textAnchor="middle"
+              fontSize="11.5"
+              fontWeight="500"
+              fill={isActive ? "var(--ink)" : "var(--ink-3)"}
+              fontFamily="var(--font-inter, ui-sans-serif, sans-serif)"
+              letterSpacing="-0.01em"
+              style={{ userSelect: "none", transition: "fill 0.45s" }}
+            >
+              {n.label}
+            </text>
+
+            {/* Meta timestamp */}
+            <text
+              x={n.x}
+              y={metaY}
+              textAnchor="middle"
+              fontSize="8.5"
+              fill={isActive ? "var(--brand-deep)" : "var(--ink-4)"}
+              fontFamily="var(--font-jetbrains-mono, ui-monospace, monospace)"
+              letterSpacing="0.08em"
+              style={{ userSelect: "none", transition: "fill 0.45s" }}
+            >
+              {n.meta} IST
+            </text>
+          </g>
+        );
+      })}
+    </svg>
   );
 }

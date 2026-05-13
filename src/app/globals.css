@@ -611,3 +611,56 @@ section[data-paper] > :not([data-no-lift]) { position: relative; z-index: 1; }
   to   { opacity: 1; }
 }
 
+/* ---- btn-glow — rotating conic aura on CTA buttons (forthetimes-inspired) ---- */
+@property --btn-glow-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes BtnGlowSpin {
+  to { --btn-glow-angle: 360deg; }
+}
+
+/* Wrap a <span class="btn-glow rounded-full"> (or rounded-[3px]) around any
+   button. The border-radius on the wrapper must match the button's own radius. */
+.btn-glow {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+}
+.btn-glow::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--btn-glow-angle),
+    transparent 0deg,
+    transparent 192deg,
+    oklch(0.82 0.085 75 / 0.35) 238deg,
+    oklch(0.94 0.06  75 / 0.90) 272deg,
+    oklch(0.82 0.085 75 / 0.35) 306deg,
+    transparent 352deg,
+    transparent 360deg
+  );
+  animation: BtnGlowSpin 3.2s linear infinite;
+  z-index: -1;
+}
+
+/* ---- workflow arc — node pulse ring ---- */
+@keyframes node-pulse {
+  0%, 100% { transform: scale(1);    opacity: 0.50; }
+  50%       { transform: scale(1.55); opacity: 0.12; }
+}
+.workflow-node-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: node-pulse 2.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-glow::before    { animation: none; }
+  .workflow-node-pulse { animation: none; opacity: 0; }
+}
+

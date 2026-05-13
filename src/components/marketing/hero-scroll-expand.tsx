@@ -208,16 +208,18 @@ export function HeroScrollExpand() {
                       developed in India, hosted in India, verified at the Bar Council.
                     </p>
                     <div className="mt-8 flex flex-wrap items-center gap-3">
-                      <Link href="/waitlist">
-                        <Button
-                          size="lg"
-                          variant="ink"
-                          className="float-soft press group rounded-full px-6"
-                        >
-                          Join the waitlist
-                          <ArrowUpRight className="ml-1.5 h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                        </Button>
-                      </Link>
+                      <span className="btn-glow rounded-full">
+                        <Link href="/waitlist">
+                          <Button
+                            size="lg"
+                            variant="ink"
+                            className="float-soft press group relative rounded-full px-6"
+                          >
+                            Join the waitlist
+                            <ArrowUpRight className="ml-1.5 h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                          </Button>
+                        </Link>
+                      </span>
                       <Link href="#services">
                         <Button
                           size="lg"
