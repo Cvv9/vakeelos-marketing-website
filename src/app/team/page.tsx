@@ -25,6 +25,15 @@ const MEMBERS = [
     site: "https://varunc.com",
     photo: "/varun-headshot.jpg",
   },
+  {
+    initials: "HSE",
+    name: "Jaswanth Valiveti",
+    role: "Head of Sales & Customer Experience",
+    bio: "8+ years closing institutional deals, building teams, and understanding how professionals work under pressure — across India and the UK. An engineer with a Master's in International Business, raised in a lawyer's household, Jaswanth saw first-hand how one of India's most demanding professions was still running on decades-old practices and institutional memory. That gap never left him. Vakeel OS is built to close it.",
+    linkedin: "https://www.linkedin.com/in/jaswanthvrb/",
+    site: null,
+    photo: "/jaswanth-headshot.jpeg",
+  },
 ];
 
 function nameInitials(name: string): string {
@@ -137,7 +146,7 @@ export default function TeamPage() {
               Our team
             </p>
             <h2 className="display-tight mt-4 text-[34px] leading-[1.02] tracking-tight text-ink sm:text-[44px]">
-              Two founders. <span className="accent">One mission.</span>
+              Three builders. <span className="accent">One mission.</span>
             </h2>
           </div>
           <p className="hidden max-w-xs text-[14px] leading-[1.6] text-ink-3 sm:block">
